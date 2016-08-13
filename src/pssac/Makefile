@@ -1,7 +1,8 @@
+GMT_INC=-I${GMT4HOME}/include
+GMT_LIBS=-L${GMT4HOME}/lib -lgmt -lpsl -lgmtps -lnetcdf -lm
 CFLAGS = -O ${GMT_INC}
 
 pssac: pssac.o sacio.o
-	$(LINK.c) -o $@ $@.o sacio.o $(GMT_LIBS)
-
+	$(CC) -o $@ $@.o sacio.o $(GMT_LIBS)
 clean:
-	rm -f pssac *.o
+	rm -f *.o
