@@ -4,7 +4,8 @@ sub plot {
   local($mdl, $t1, $t2, $am, $num_com, $sec_per_inch) = @_;
   local($nn,$tt,$plt1,$plt2,$plt3,$plt4,$i,$nam,$com1,$com2,$j,$x,$y,@aa,$rslt,@name,@aztk);
   local $keepBad = 0;
-  
+  system "gmtset MEASURE_UNIT inch";
+  system "gmtset PAGE_ORIENTATION portrait"; 
   @trace = ("1/255/255/255","3/0/0/0");       # plot data trace
   @name = ("Pz","Pr","Sz"," Sr","Sh");
   
