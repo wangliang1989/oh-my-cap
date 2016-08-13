@@ -1,10 +1,8 @@
+FC=gfortran -ffixed-line-length-none
 optimize=-O
 FFLAGS=$(optimize)
-CFLAGS=$(optimize)
-#if SAC library has been installed, uncomment the next two lines
-#CFLAGS=$(optimize) -DSAC_LIB
-#SACLIB=-L$(SACHOME)/lib -lsac -lsacio
-#
+CFLAGS=$(optimize) -DSAC_LIB
+SACLIB=-L$(SACHOME)/lib -lsac -lsacio
 
 SUBS = fft.o Complex.o sacio.o
 FKSUBS = fk.o kernel.o prop.o source.o bessel.o $(SUBS)
@@ -12,19 +10,19 @@ FKSUBS = fk.o kernel.o prop.o source.o bessel.o $(SUBS)
 all: fk syn st_fk trav sachd
 
 syn: syn.o ${SUBS} radiats.o futterman.o
-	${LINK.f} -o $@ $^ ${SACLIB} -lm
+	$(CC) -o $@ $^ ${SACLIB} -lm
 
 fk: ${FKSUBS} haskell.o
-	${LINK.f} -o $@ $^
+	$(FC) -o $@ $^
 
 st_fk: ${FKSUBS} st_haskell.o
-	${LINK.f} -o $@ $^
+	$(FC) -o $@ $^
 
 sachd: sachd.o sacio.o
-	${LINK.c} -o $@ $^
+	$(CC) -o $@ $^ -lm
 
 trav: trav.o tau_p.o
-	$(LINK.f) -o $@ trav.o tau_p.o
+	$(FC) -o $@ trav.o tau_p.o
 
 bessel.f: bessel.FF
 	cpp -traditional-cpp $< > $@
