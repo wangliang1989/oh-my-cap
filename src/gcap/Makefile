@@ -1,24 +1,26 @@
+FC = gfortran -ffixed-line-length-none
 FFLAGS = -O
-CFLAGS = ${FFLAGS} -I$(NR)/NRC_includes
-NRLIB = $(MY_BIN)
+CFLAGS = ${FFLAGS}
+SACLIB = -L$(SACHOME)/lib -lsac -lsacio
 
 CAP  = cap cap_dir mtdcmp radpttn
 
-SUBS = fft.o Complex.o radiats.o grid3d.o futterman.o sacio.o trap.o
+SUBS = fft.o Complex.o radiats.o grid3d.o futterman.o sacio.o trap.o \
+	cap_sub.o nrutil.o jacobi.o eigsrt.o
 
 all: $(CAP)
 
-cap cap_dir: %:%.o $(SUBS) cap_sub.o
-	$(LINK.f) -o $@ $^ -L$(SACHOME)/lib -lsac -lsacio -L$(NRLIB) -lnr
+cap cap_dir: %:%.o $(SUBS)
+	$(CC) -o $@ $^ ${SACLIB} -lm
 
 cap_dir.o: cap.c
-	$(COMPILE.c) -DDIRECTIVITY -o $@ $<
+	$(CC) -DDIRECTIVITY -c -o $@ $<
 
 mtdcmp: mtdcmp.o
-	$(LINK.f) -o $@ $@.o
+	$(FC) -o $@ $@.o
 
 radpttn: radpttn.o radiats.o
-	$(LINK.c) -o $@ $@.o radiats.o -lm
+	$(CC) -o $@ $@.o radiats.o -lm
 
 clean:
-	rm -f $(CAP) *.o
+	rm -f *.o
