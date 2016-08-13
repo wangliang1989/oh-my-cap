@@ -14,24 +14,27 @@
  *	9/10/2002	Lupei Zhu	correct yscale for multiple trace
  *					plot so that the amplitude can be
  *					shown from y-tick
+ *	11/13/2009	Lupei Zhu	changed to go with GMT4.3
+ *	5/3/2012	Lupei Zhu	add -N option to clip traces
  */
 
 /*#include <stdio.h>
 #include <string.h>
 #include <fcntl.h>*/
 #include "gmt.h"
+#include "pslib.h"
 #include "sac.h"
 
 int main (int argc, char **argv) {
   int 	i,j,ii,n,n_files=0,fno,xy_errors[2],nrdc=-99,colr[3];
   int	plot_n,pn,ierr,ntrace;
-  float	*yval, *fpt,x0=0,t0,y0,xx0,yy0;
+  float	*yval, *fpt,x0=0.,t0,y0,xx0,yy0;
   double *xx,*yy,*xp,*yp;
-  double *xxx,*yyy,*xxp,*yyp,cam,cam0;
+  double *xxx,*yyy,*xxp,*yyp,cam,cam0,maxamp=0.;
   char	line[512],sac_file[100],penpen[20],prf, rdc;
   SACHEAD	h;
-  BOOLEAN	error=FALSE,norm=FALSE,multi_segments=FALSE,
-     reduce=FALSE,window_cut=FALSE,phase_paint=FALSE,intg=FALSE,
+  GMT_LONG	error=FALSE,norm=FALSE,multi_segments=FALSE,
+     reduce=FALSE,window_cut=FALSE,phase_paint=FALSE,intg=FALSE,isqr=FALSE,
      rmean=FALSE,window_amp=FALSE,scaleAll=FALSE, firstTrace=TRUE,
      positioning = FALSE, vertical_trace = FALSE;
   double	west=0.0,east=0.0,south=0.0,north=0.0,size=1.,cut0,cut1,
@@ -50,7 +53,7 @@ int main (int argc, char **argv) {
       case 'B': case 'J': case 'K': case 'O':
       case 'R': case 'U': case 'X': case 'x': case 'Y':
       case 'y': case '#': case '\0':
-	error += GMT_get_common_args (argv[i],&west,&east,&south,&north);
+	error += GMT_parse_common_options (argv[i],&west,&east,&south,&north);
 	break;
 	
       /* Supplemental parameters */
@@ -93,6 +96,12 @@ int main (int argc, char **argv) {
 	   }
 	}
 	break;
+      case 'N':		/* clip traces */
+        sscanf(&argv[i][2],"%lf",&maxamp);
+	break;
+      case 'Q':		/* square traces */
+        isqr = TRUE;
+	break;
       case 'r':		/* remove mean */
 	rmean=TRUE;
 	break;
@@ -115,7 +124,7 @@ int main (int argc, char **argv) {
   }
   
   if (argc == 1 || error) {	/* Display usage */
-    fprintf (stderr,"Usage: pssac standardGMToptions [SACfiles] [-C[t1/t2]] [-E(k|d|a|n|b)(t[n]|vel)] [-Gr/g/b/c] [-I] [-Msize[/alpha]] [-r] [-Sshift] [-V]\n\n\
+    fprintf (stderr,"Usage: pssac standardGMToptions [SACfiles] [-C[t1/t2]] [-E(k|d|a|n|b)(t[n]|vel)] [-Gr/g/b/c] [-I] [-Msize[/alpha]] [-Nclip] [-Q] [-r] [-Sshift] [-V]\n\n\
     pssac plots SAC traces. If no SAC file names is provided in the command line, it expects (sacfile,[x,[y [pen]]) from stdin.\n\
        -C only plot data between t1 and t2\n\
        -E option determines\n\
@@ -137,23 +146,18 @@ int main (int argc, char **argv) {
 	  size/alpha: if alpha<0, use same scale for all traces\n\
 	      else plot absolute amplitude multiplied by size*r^alpha\n\
 	      where r is the distance range in km\n\
+       -N clip the trace\n\
+       -Q square the trace\n\
        -r remove the mean value in the trace\n\
        -S shift traces by shift seconds\n\
        -V plot traces vertically\n");
     exit(-1);
   }
 
-  GMT_put_history (argc, argv);   /* Update .gmtcommands */
+  /*GMT_put_history (argc, argv);   Update .gmtcommands */
   
   GMT_map_setup (west,east,south,north);
-  ps_plotinit (CNULL,gmtdefs.overlay,gmtdefs.page_orientation,
-       gmtdefs.x_origin,gmtdefs.y_origin,gmtdefs.global_x_scale,
-       gmtdefs.global_y_scale,gmtdefs.n_copies,gmtdefs.dpi,
-       GMT_INCH,gmtdefs.paper_width,gmtdefs.page_rgb,
-       gmtdefs.encoding.name, GMT_epsinfo (argv[0]));
-  GMT_echo_command (argc,argv);
-  if (gmtdefs.unix_time) GMT_timestamp (argc, argv);
-/*  GMT_map_clip_on (GMT_no_rgb,3);*/
+  GMT_plotinit (argc, argv);
   GMT_setpen (&pen);
 
   ntrace=0;
@@ -165,6 +169,7 @@ int main (int argc, char **argv) {
        else strcpy(sac_file,argv[fno]);
     } else {		/* from standard in */
        i=sscanf(line, "%s %f %f %s",sac_file,&x0,&y0,penpen);
+       if (i==1) x0 = 0.;
        if (i>2) positioning = TRUE;
        if (i>3) {
           /* set pen attribute */
@@ -221,6 +226,7 @@ int main (int argc, char **argv) {
       if( (window_cut && t>=cut0 && t<=cut1) || ( !window_cut) ){
 	xx[n]=t;
 	if (intg) {yy[n] = yy0;yy0+=yval[i];} else yy[n]=yval[i];
+	if (isqr) yy[n] *= yy[n];
 	n++;
       }
       t += h.delta;
@@ -241,7 +247,7 @@ int main (int argc, char **argv) {
       h.depmen = h.depmen/n;
       if(rmean) for(i=0;i<n;i++) yy[i]-=h.depmen;
 
-      if(norm)	yscale=pow(h.dist,alpha)*size;
+      if(norm)	yscale=pow(fabs(h.dist),alpha)*size;
       else {
 	if (!scaleAll || firstTrace) {
 	   yscale=size*fabs((north-south)/(h.depmax-h.depmin)/project_info.pars[1]);
@@ -249,7 +255,14 @@ int main (int argc, char **argv) {
 	}
       }
 
-      for(i=0;i<n;i++) yy[i]=(double) yy[i]*yscale + y0;
+      for(i=0;i<n;i++) {
+          dummy1 = (double) yy[i]*yscale;
+          if (maxamp>0.) {
+             if (dummy1>maxamp) dummy1=maxamp;
+             if (dummy1<-maxamp) dummy1=-maxamp;
+          }
+          yy[i] = dummy1 + y0;
+      }
     }
 
     if (vertical_trace) {
@@ -307,7 +320,7 @@ int main (int argc, char **argv) {
                 memcpy ((void *)yyp,(void *)GMT_y_plot,pn*sizeof (double));
 		ps_setpaint(gmtdefs.foreground_rgb);
 		ps_setline (pen.width+10);
-		ps_line (xxp, yyp, pn, 3, FALSE, FALSE);
+		ps_line (xxp, yyp, pn, 3, FALSE);
 		ps_setline (1);
                 ps_polygon (xxp,yyp,pn,colr,0);
 		GMT_free((void *)xxp);GMT_free((void *)yyp);
@@ -322,7 +335,7 @@ int main (int argc, char **argv) {
        GMT_setpen(&pen);
     }
 
-    ps_line (xp, yp, plot_n, 3, FALSE, FALSE);
+    ps_line (xp, yp, plot_n, 3, FALSE);
 
     GMT_free((void *)xp);
     GMT_free((void *)yp);
@@ -333,7 +346,7 @@ int main (int argc, char **argv) {
 /*  GMT_map_clip_off (); */
   
   if (frame_info.plot) GMT_map_basemap ();
-  ps_plotend (gmtdefs.last_page);
+  GMT_plotend ();
   GMT_end (argc,argv);
   return 0;
 }
