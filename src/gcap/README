@@ -1,0 +1,73 @@
+# 	Information for the gCAP package
+#               @(#)README      2.0 3/6/2013
+
+        Copyright (c) 1996-2013, L. Zhu (zhul@slu.edu)
+
+Permission to use, copy, modify, and distribute this package and supporting
+documentation for any purpose without fee is hereby granted, provided
+that the above copyright notice appear in all copies, that both that
+copyright notice and this permission notice appear in supporting
+documentation.
+
+In case that you modify any codes in this package, you have to
+change the name of the modified code. You are welcome to send me a note
+about your modification and any suggestion.
+
+In case that you redistribute this package to others, please send me
+the contacting info (email addr. preferred) so that future updates
+of this package can be sent to them.
+
+
+1. Content of the Package
+
+The gCAP package contains following main codes:
+
+  cap.c		Generalized Cut-and-Paste (gCAP) full moment-tensor inversion code.
+
+  cap.pl	A Perl script to simplify the use of gCAP and to plot waveform fits.
+
+  depth.pl	A perl script to read in the outputs of gCAP for different
+		source depths and estimate the best source depth.
+
+  mtdcmp.f	A Fortran code to decompose a general moment tensor into ISO, DC
+		and CLVD tensors, and to compute the ISO and CLVD parameters.
+
+  radpttn.c	A C code to compute the normalized moment tensor components
+		from strike dip rake iso clvd and the P/SV/SH radiation pattern.
+
+
+2. Installation
+
+To compile the codes see Makefile. It requires that the Numerical Recipes
+Package and SAC have been installed. Set environment variables NR_HOME and
+SAC_HOME to point to where they are installed accordingly.
+
+
+3. Usage
+
+For usage and examples, run cap.pl without argument.
+
+
+4. References
+
+   Zhao and Helmberger, 1994, Source estimation from broadband regional seismograms.
+	BSSA, 84, 91-104.
+   Zhu and Helmberger, 1996, Advancement in source estimation techniques using
+	broadband regional seismograms. BSSA 86, 1634-1641.
+   Zhu and Ben-Zion, 2013, Parameterization of general seismic potency and moment
+	tensors for source inversion of seismic waveform data. GJI, doi:10.1093/gji/ggt137.
+
+
+5. Revision History
+
+   1995-2008		LZ	Numerious modifications.
+   Mar. 11, 2010 	LZ	Correct a bug when computing Mw using interpolation.
+                                Change to no interpolation of FM untill the correct
+				Mw is found to aoid unstable interpolation in some cases.
+   Mar. 12, 2010	LZ	Add isotropic component in the inversion.
+   June 10, 2010	LZ	Correct a bug introduced in Jan. 2008 which deleted
+				distance compensation and Pnl weighting of the
+				Greens functions.
+   Nov.  5, 2012	LZ	Add CLVD component. Add bootstrapping option.
+   Mar.  5, 2013	LZ	Change the CLVD parameter to sqrt(3/2)*lambda2.
+				depth.pl now plots beach ball of full moment tensor.
