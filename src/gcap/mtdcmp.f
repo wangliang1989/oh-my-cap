@@ -5,9 +5,9 @@ c
       implicit none
 c
       character*120 line
-      real*4 m0,mxx,mxy,mxz,myy,myz,mzz
+      real*4 mxx,mxy,mxz,myy,myz,mzz
       real*8 mt(3,3),d(3),v(3,3),miso(3,3),mdc(3,3),mclvd(3,3)
-      real*8 dev,clvd,iso
+      real*8 m0,dev,clvd,iso
 c
 50    write(0,*)'input M0,Mxx,Mxy,Mxz,Myy,Myz,Mzz. if the tensor is in sph. coord., use Mtt,-Mtp,Mrt,Mpp,-Mrp,Mrr'
       read(*, '(a120)', END=100) line
