@@ -11,12 +11,12 @@
 #
 
 # these are the only things one need to change based on the site installation
-$home = $ENV{HOME};			# my home directory
-require "$home/Src/cap/cap_plt.pl";	# include plot script
+$oh_my_cap = $ENV{OH_MY_CAP};			# my home directory
+require "$oh_my_cap/src/gcap/cap_plt.pl";	# include plot script
 
 #================defaults======================================
 $cmd = "cap";
-$green = "$home/data/models/Glib";	#green's function location
+$green = "$oh_my_cap/Glib";	#green's function location
 $repeat = 0;
 $bootstrap = 0;
 $fm_thr = 0.01;
