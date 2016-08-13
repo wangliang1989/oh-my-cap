@@ -1,0 +1,13 @@
+*.o
+src/fk/bessel.f
+src/fk/fk
+src/fk/sachd
+src/fk/st_fk
+src/fk/syn
+src/fk/trav
+src/gcap/cap
+src/gcap/cap_dir
+src/gcap/mtdcmp
+src/gcap/radpttn
+src/pssac/pssac
+*.grn.?
