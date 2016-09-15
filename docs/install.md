@@ -1,4 +1,4 @@
-## oh-my-cap的安装
+## Oh My CAP 的安装
 
 我们已经在 centos 上验证了下面的安装步骤，在 Linux 和 Mac 上安装应该都是没有问题的。
 因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以本安装指南不受用于 Windows。
