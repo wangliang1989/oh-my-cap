@@ -1,0 +1,13 @@
+site_name: Oh My CAP
+site_url: https://wangliang1989.github.com/oh-my-cap
+site_author: wangliang1989
+docs_dir: .
+repo_url: https://github.com/wangliang1989/oh-my-cap
+
+pages:
+- 简介: index.md
+- 安装: install.md
+- 流程:
+  - '数据预处理': preprocess.md
+  - '计算格林函数': green.md
+  - '反演': inversion.md
