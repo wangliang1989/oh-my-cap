@@ -11,3 +11,5 @@ pages:
   - '数据预处理': preprocess.md
   - '计算格林函数': green.md
   - '反演': inversion.md
+- 其他:
+  - '代码差异': compare.md
