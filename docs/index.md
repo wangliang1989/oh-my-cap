@@ -27,6 +27,15 @@ CAP 是计算震源机制的一种非常常用的方法，很多地震学同行�
 2.  详细的安装指南
 3.  完整的数据处理流程以及示例
 
+## 联系我们
+
+Email：wangliang.one@foxmail.com
+
+QQ 群：580712662
+
+[直接留言](http://wangliang.one/#contact)
+
+
 ## 参考文献
 
 1. Zhu, L., and D. V. Helmberger, 1996, Advancements in source estimation techniques using broadband regional seismograms. *BSSA*, 86, 1634-1641. (78)
