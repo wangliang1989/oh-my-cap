@@ -27,6 +27,8 @@ gCAP 依赖 SAC、GMT、fk 和 pssac。其次，要完成一系列的编译需�
 
 申请地址是 <http://ds.iris.edu/ds/nodes/dmc/forms/sac/> 。
 
+本项目要求使用SAC版本号为v101.6a。
+
 在获得源码包或者二进制包后，按照 SAC 参考手册的相关内容进行安装：
 
 [SAC 在 Linux 上的安装](https://seisman.github.io/SAC_Docs_zh/introduction/linux-install.html)
