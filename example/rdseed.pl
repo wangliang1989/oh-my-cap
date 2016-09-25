@@ -14,7 +14,7 @@ unlink glob "*.[rtz]";
 unlink "rdseed.err_log";
 
 # 解压seed文件
-foreach my $seed (glob "*.seed") {
+foreach my $seed (glob "*.seed *.SEED") {
     system "rdseed -Rdf $seed";
 }
 
