@@ -11,8 +11,6 @@ my $usage = "
 
 foreach my $event (@ARGV) {
     system "perl rdseed.pl $event";
-    system "perl merge.pl $event";
-    system "perl rename.pl $event";
     system "perl eventinfo.pl $event";
     system "perl marktime.pl $event";
     system "perl transfer.pl $event";
