@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use List::Util qw(min max);
+$ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
