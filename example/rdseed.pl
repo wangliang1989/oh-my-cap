@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+$ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
