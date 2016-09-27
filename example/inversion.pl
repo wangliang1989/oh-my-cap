@@ -1,0 +1,11 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+
+@ARGV == 1 or die ;
+my ($event) = @ARGV;
+
+for (my $depth = 5; $depth <= 30; $depth = $depth + 5) {
+    system "cap.pl -H0.2 -P0.3 -S5/10/0 -T35/70 -D2/1/0.5 -C0.05/0.3/0.02/0.1 -W1 -X10 -Mhk_$depth/5.0 $event";
+}
