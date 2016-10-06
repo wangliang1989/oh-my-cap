@@ -5,7 +5,8 @@ use warnings;
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
 
-system "grep -h Event $dir/*_*.out > junk.out";
-system "depth.pl junk.out $dir > junk.ps";
+chdir "$dir";
+system "grep -h Event *_*.out > junk.out";
+system "depth.pl junk.out $dir > depth.ps";
 unlink "junk.out";
-system "mv junk.ps ./$dir/depth.ps";
+chdir "..";
