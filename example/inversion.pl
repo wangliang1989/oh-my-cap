@@ -6,6 +6,8 @@ use warnings;
 @ARGV == 1 or die ;
 my ($event) = @ARGV;
 
+die "no weight.dat\n" if !-e "./$event/weight.dat";
+
 for (my $depth = 5; $depth <= 30; $depth = $depth + 5) {
     if ($depth < 10) {
         $depth = "0$depth";
