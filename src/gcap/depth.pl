@@ -55,6 +55,7 @@ foreach $eve (@aa){
   $depth = $dep[$best] - $depth;
   printf STDERR "%s H %5.1f %5.1f\n", $line[$best],$depth,$sigma;
 
+  system "gmtset MEASURE_UNIT inch";
   open(PLT, "| psxy -JX3/1.8 -R$dep[0]/$dep[$ii]/-10/100 $xx");
   for($l=$dep[0];$l<$dep[$ii];$l+=0.2) {
     $aa = ($l-$depth)/$sigma;

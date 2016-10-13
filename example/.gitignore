@@ -1,0 +1,9 @@
+*.SAC
+RESP.*
+*.[rtz]
+*.log
+.gmtcommands4
+.gmtdefaults4
+*.out
+*.ps
+weight*

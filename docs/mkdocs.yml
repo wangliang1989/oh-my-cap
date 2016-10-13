@@ -7,9 +7,12 @@ repo_url: https://github.com/wangliang1989/oh-my-cap
 pages:
 - 简介: index.md
 - 安装: install.md
+- 快速开始: quick-start.md
 - 流程:
+  - '流程简介': intro-to-procedures.md
+  - '计算格林函数': gflib.md
   - '数据预处理': preprocess.md
-  - '计算格林函数': green.md
   - '反演': inversion.md
 - 其他:
   - '代码差异': compare.md
+- FAQ: FAQs.md
