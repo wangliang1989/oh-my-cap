@@ -13,6 +13,7 @@ pages:
   - '计算格林函数': gflib.md
   - '数据预处理': preprocess.md
   - '反演': inversion.md
+- 反演参数: parameter.md
 - 其他:
   - '代码差异': compare.md
 - FAQ: FAQs.md
