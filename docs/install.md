@@ -5,10 +5,21 @@
 
 gCAP 依赖 SAC、GMT、fk 和 pssac。其次，要完成一系列的编译需要 gcc 和其他辅助的编译工具。
 下面的操作请依序完成：
+## 下载
+
+### 方法一
+
+直接下载： https://codeload.github.com/wangliang1989/oh-my-cap/zip/master
+
+### 方法二
+
+使用 git：
+
+    git clone https://github.com/wangliang1989/oh-my-cap.git
 
 ## gcc 和其他辅助的编译工具
 
-### CentOS:
+### CentOS
 
     sudo yum install gcc # C 编译器
     sudo yum install gcc-c++ # C++ 编译器
