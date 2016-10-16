@@ -15,5 +15,5 @@ pages:
   - '反演': inversion.md
 - 反演参数: parameter.md
 - 其他:
-  - '代码差异': compare.md
+    - '代码差异': code-diffs.md
 - FAQ: FAQs.md
