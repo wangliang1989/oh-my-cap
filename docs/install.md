@@ -83,7 +83,7 @@ gcap 需要使用 pssac 绘制地震波形。
 gCAP 使用了商业软件 Numerical Recipes（简称 NR）中的一些子函数，
 包括 `matrix` 、 `free_matrix` 、 `free_convert_matrix` 、 `jacobi` 和 `eigsrt` 。
 由于版权原因，本项目并不包含这几个子函数的源码。
-用户应自行获取缺失源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
+用户应自行获取缺失的源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
 再在该目录下进行编译:
 
     $ make
