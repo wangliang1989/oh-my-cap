@@ -2,11 +2,10 @@
 use strict;
 use warnings;
 
-
-@ARGV == 1 or die ;
+@ARGV == 1 or die "Usage: perl $0 dirname";
 my ($event) = @ARGV;
 
-die "no weight.dat\n" if !-e "./$event/weight.dat";
+die "no weight.dat\n" if !-e "$event/weight.dat";
 
 for (my $depth = 5; $depth <= 30; $depth = $depth + 5) {
     if ($depth < 10) {
