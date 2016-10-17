@@ -1,4 +1,4 @@
-# Oh My CAP 的安装
+# 安装
 
 以下安装步骤在 CentOS 上验证通过。在其他 Linux 发行版及 Mac 上安装步骤类似。
 因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以本安装指南不适用于 Windows。
@@ -9,7 +9,7 @@ gCAP 依赖 SAC、GMT、fk 和 pssac。
 
 ### 方法1
 
-直接下载： https://codeload.github.com/wangliang1989/oh-my-cap/zip/master
+直接下载： [oh-my-cap.zip](https://codeload.github.com/wangliang1989/oh-my-cap/zip/master)
 
 ### 方法2
 
@@ -54,7 +54,11 @@ GMT4 的安装请参考：
 - [GMT 4 在 Linux 上的安装](https://seisman.info/install-gmt4-under-linux.html)
 - [GMT 4 在 Mac 上的安装](https://seisman.info/install-gmt4-under-mac.html)
 
-GMT 5用户可以可以参考 [GMT4 与 GMT5 双版本共存](https://seisman.info/multiple-versions-of-gmt.html) 一文，以保证系统中存在GMT4和GMT5两个版本且不互相影响。
+GMT 5用户可以参考 [GMT4 与 GMT5 双版本共存](https://seisman.info/multiple-versions-of-gmt.html) 一文，以保证系统中存在GMT4和GMT5两个版本且不互相影响。
+
+## TauP
+
+本项目中使用 TauP 计算理论到时。TauP 的安装请参考 [TauP 的安装](https://seisman.info/install-taup.html)。
 
 ## fk
 
