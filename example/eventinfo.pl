@@ -9,7 +9,7 @@ my ($dir) = @ARGV;
 
 chdir $dir;
 
-open(INFO, "< info") or die "Cannot find event info.";
+open(INFO, "< event.info") or die "Cannot find event info.";
 my $eventinfo = <INFO>;
 my ($origin, $evla, $evlo, $evdp, $mag) = split " ", $eventinfo;
 close(INFO);
