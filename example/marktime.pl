@@ -7,8 +7,8 @@ $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
 
-my $taup = `which taup`;
-exit "Won't mark time in SAC files because Taup hasn't install\n" unless (defined($taup));
+my $taup = `which taup_time`;
+exit "Skip marking arrival times in SAC files because Taup isn't install\n" unless (defined($taup));
 
 chdir $dir;
 
