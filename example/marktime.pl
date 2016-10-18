@@ -7,6 +7,9 @@ $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
 
+my $taup = `which taup`;
+exit "Won't mark time in SAC files because Taup hasn't install\n" unless (defined($taup));
+
 chdir $dir;
 
 open(SAC, "| sac") or die "Error in opening SAC\n";
