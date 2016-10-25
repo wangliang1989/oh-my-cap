@@ -11,13 +11,13 @@ my $ts = 0;
 my $ddist = 5;
 
 chdir $dir;
-open(IN, "saclst dist t0 t1 f *.z | sort -k2n |");
+open(IN, "saclst dist t0 t1 t9 f *.z | sort -k2n |");
 my @lines = <IN>;
 close(IN);
 
 open (OUT, '> ./weight.dat');
 foreach my $line (@lines) {
-    my ($fname, $dist, $t0, $t1) = split /\s+/, $line;
+    my ($fname, $dist, $t0, $t1, $t9) = split /\s+/, $line;
     my ($net_sta) = split /\./, $fname;
     # 震中距简化为5公里的倍数
     $dist = int($dist/$ddist + 0.5) * $ddist;
@@ -27,6 +27,8 @@ foreach my $line (@lines) {
     $tp = $t0 if $t0 != -12345;
     $tp = $t1 if $t1 != -12345;
 
+    # 如果头段 t9 是标记了值的，则权重设置为0
+    ($w1, $w2, $w3, $w4, $w5) = (0, 0, 0, 0, 0) if $t9 != -12345;
     printf OUT "%10s %8d %1d %1d %1d %1d %1d %5.1f %5.1f\n", $net_sta, $dist, $w1, $w2, $w3, $w4, $w5, $tp, $ts;
 }
 chdir "..";
