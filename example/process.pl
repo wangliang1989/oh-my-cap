@@ -2,26 +2,22 @@
 use strict;
 use warnings;
 
-@ARGV >= 1 or die "Usage: perl $0 event1 event2 ... eventn\n";
+@ARGV >= 1 or die "Usage: \n\tperl $0 event1 event2 ... eventn\n\tperl $0 events.info\n";
 
-my @dir;
-foreach (@ARGV) {
-    if (-d $_) {
-        push @dir, $_;
-        next;
+my @events;
+
+if (@ARGV == 1 and -f $ARGV[0]) {
+    open(IN, "< $ARGV[0]");
+    foreach (<IN>) {
+        my ($event) = split /\s+/;
+        push @events, $event;
     }
-    if (-e $_) {
-        open (IN,"< $_");
-        foreach (<IN>) {
-            my ($dir) = split /\s+/;
-            push @dir, $dir;
-        }
-        close(IN);
-        next;
-    }
-    print "can not find $_ !\n";
+    close(IN);
+} else {
+    @events = @ARGV;
 }
-foreach my $event (@dir) {
+
+foreach my $event (@events) {
     system "perl rdseed.pl $event";
     system "perl eventinfo.pl $event";
     system "perl marktime.pl $event";
