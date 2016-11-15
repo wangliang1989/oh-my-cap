@@ -44,6 +44,10 @@
 
     $ perl run_fk.pl
 
+如果安装了 Perl 的并行模块 Parallel::ForkManager，你可以使用脚本 `run_parallel.pl`，用并行的方式完成上述计算（差别仅限于提高了运算速度，结果一样）：
+
+    $perl run_parallel.pl
+
 ## 格林函数库
 
 执行完 `run_fk.pl` 后会得到 6 个名为 `model_xx`（`xx` 代表震源深度）的文件夹，其中包含了震源深度取不同值所对应的格林函数。
