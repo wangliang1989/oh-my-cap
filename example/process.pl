@@ -23,5 +23,5 @@ foreach my $event (@events) {
     system "perl marktime.pl $event";
     system "perl transfer.pl $event";
     system "perl rotate.pl $event";
-    system "perl resample.pl $event 0.2";
+    system "perl resample.pl $event";
 }
