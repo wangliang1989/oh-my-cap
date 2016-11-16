@@ -45,10 +45,19 @@ sub config_parser() {
     foreach my $line (@lines) {
         next if $line =~ /^#/;
         chomp($line);
-        my ($key, $value) = split ":", $line;
+        my ($key, $value) = trim(split ":", $line);
         $pars{$key} = $value;
     }
     return %pars;
+}
+
+sub trim() {
+    my @strings;
+    foreach my $s (@_) {
+        $s =~ s/^\s+|\s+$//g;
+        push @strings, $s;
+    }
+    return @strings;
 }
 
 1;
