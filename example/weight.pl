@@ -6,7 +6,6 @@ $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 @ARGV >= 1 or die "Usage: perl $0 dirs\n";
 my @dir = @ARGV;
 
-my ($w1, $w2, $w3, $w4, $w5) = (1, 1, 1, 1, 1);
 my $ts = 0;
 my $ddist = 5;
 my $weight = "weight.dat";
@@ -20,6 +19,7 @@ foreach my $dir (@dir){
 
     open (OUT, "> ./$weight");
     foreach my $line (@lines) {
+        my ($w1, $w2, $w3, $w4, $w5) = (1, 1, 1, 1, 1);
         my ($fname, $dist, $t0, $t1, $t9) = split /\s+/, $line;
         my ($net_sta) = split /\./, $fname;
         # 震中距简化为5公里的倍数
