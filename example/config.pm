@@ -6,7 +6,6 @@ sub read_config() {
     my ($dir) = @_;
 
     my %pars;
-    my $par_id = 0;
     my $conf_file;
 
     # 1st: project-wide configure file
@@ -21,19 +20,10 @@ sub read_config() {
     $conf_file = "$dir/event.conf";
     %pars = config_parser($conf_file, %pars) if -e $conf_file;
 
-    # check if all pars are valid
-    check_pars(%pars);
+    # setup arguments for cap
+    $pars{'cap_args'} = setup_cap_args(%pars);
 
     return %pars;
-}
-
-sub check_pars() {
-    my (%pars) = @_;
-
-    while (my ($key, $value) = each (%pars)) {
-        print "$key $value\n";
-    }
-    return 0;
 }
 
 sub config_parser() {
@@ -54,6 +44,19 @@ sub config_parser() {
     return %pars;
 }
 
-sub  trim { my $s = shift; $s =~ s/^\s+|\s+$//g; return $s };
+sub setup_cap_args() {
+    my (%pars) = @_;
+
+    my $cap_args;
+
+    my @args = qw/-C -D -H -P -S -T -W -X -Z/;
+    foreach my $args (@args) {
+        $cap_args .= "$args$pars{$args} ";
+    }
+
+    return $cap_args;
+}
+
+sub trim { my $s = shift; $s =~ s/^\s+|\s+$//g; return $s };
 
 1;
