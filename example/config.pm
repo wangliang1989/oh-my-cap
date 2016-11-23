@@ -20,6 +20,21 @@ sub read_config() {
     $conf_file = "$dir/event.conf";
     %pars = config_parser($conf_file, %pars) if -e $conf_file;
 
+    # fix argument of DEPTH
+    my @value = split /\s+/, $pars{"DEPTH"};
+    my @depth;
+    foreach (@value) {
+        if ($_ =~ m/\//g) {
+            my ($start, $end, $delta) = split m/\//;
+            for (my $depth = $start; $depth <= $end; $depth = $depth + $delta) {
+                push @depth, $depth;
+            }
+        } else {
+            push @depth, $_;
+        }
+    }
+    $pars{"DEPTH"} = join " ", @depth;
+
     # setup arguments for cap
     $pars{'cap_args'} = setup_cap_args(%pars);
 
