@@ -1,0 +1,44 @@
+{{- $scr := . -}}
+{{- range $color := (slice "red" "green" "blue" "alpha") -}}
+  {{- $label := add $color "str" -}}
+  {{- $colorstr := $scr.Get $label -}}
+  {{- /* This works for strings of 1 or 2 characters */ -}}
+  {{- $scr.Set "sum" 0 -}}
+  {{- $left := substr $colorstr 0 1 -}}
+  {{- $right := substr $colorstr -1 1 -}}
+
+  {{- if or (eq $left "a") (eq $left "A") -}}
+    {{- $scr.Add "sum" 160 -}}
+  {{- else if or (eq $left "b") (eq $left "B") -}}
+    {{- $scr.Add "sum" 176 -}}
+  {{- else if or (eq $left "c") (eq $left "C") -}}
+    {{- $scr.Add "sum" 192 -}}
+  {{- else if or (eq $left "d") (eq $left "D") -}}
+    {{- $scr.Add "sum" 208 -}}
+  {{- else if or (eq $left "e") (eq $left "E") -}}
+    {{- $scr.Add "sum" 224 -}}
+  {{- else if or (eq $left "f") (eq $left "F") -}}
+    {{- $scr.Add "sum" 240 -}}
+  {{- else -}}
+    {{- $scr.Add "sum" (mul 16 (int $left)) -}}
+  {{- end -}}
+
+  {{- if or (eq $right "a") (eq $right "A") -}}
+    {{- $scr.Add "sum" 10 -}}
+  {{- else if or (eq $right "b") (eq $right "B") -}}
+    {{- $scr.Add "sum" 11 -}}
+  {{- else if or (eq $right "c") (eq $right "C") -}}
+    {{- $scr.Add "sum" 12 -}}
+  {{- else if or (eq $right "d") (eq $right "D") -}}
+    {{- $scr.Add "sum" 13 -}}
+  {{- else if or (eq $right "e") (eq $right "E") -}}
+    {{- $scr.Add "sum" 14 -}}
+  {{- else if or (eq $right "f") (eq $right "F") -}}
+    {{- $scr.Add "sum" 15 -}}
+  {{- else -}}
+    {{- $scr.Add "sum" (int $right) -}}
+  {{- end -}}
+  {{- $scr.Set $color (int ($scr.Get "sum")) -}}
+{{- end -}}
+
+{{- .Set "alpha" (div (.Get "alpha") 255.0) -}}

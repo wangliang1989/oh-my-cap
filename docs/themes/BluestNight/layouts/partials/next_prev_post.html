@@ -1,0 +1,53 @@
+{{- if or (and (.Site.Params.post_navigation) (not (eq .Params.post_navigation false))) (.Params.post_navigation) -}}
+{{- $.Scratch.Set "prev_link" "" -}}
+{{- $.Scratch.Set "prev_title" "" -}}
+{{- $.Scratch.Set "next_link" "" -}}
+{{- $.Scratch.Set "next_title" "" -}}
+
+{{- if .Params.custom_prev -}}
+  {{ if not (eq .Params.custom_prev "none") }}
+  {{- $.Scratch.Set "file_path" .Params.custom_prev -}}
+  {{ range $page := $.Site.Pages }}
+    {{ if eq $page.File.Path ($.Scratch.Get "file_path") }}
+    {{- $.Scratch.Set "prev_link" $page.Permalink -}}
+    {{- $.Scratch.Set "prev_title" $page.LinkTitle -}}
+    {{ end }}
+  {{ end }}
+  {{ end }}
+{{- else -}}
+  {{- with .PrevInSection -}}
+    {{- $.Scratch.Set "prev_link" .Permalink -}}
+    {{- $.Scratch.Set "prev_title" .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .Params.custom_next -}}
+  {{ if not (eq .Params.custom_next "none") }}
+  {{- $.Scratch.Set "file_path" .Params.custom_next -}}
+  {{ range $page := $.Site.Pages }}
+    {{ if eq $page.File.Path ($.Scratch.Get "file_path") }}
+    {{- $.Scratch.Set "next_link" $page.Permalink -}}
+    {{- $.Scratch.Set "next_title" $page.LinkTitle -}}
+    {{ end }}
+  {{ end }}
+  {{ end }}
+{{- else -}}
+  {{- with .NextInSection -}}
+    {{- $.Scratch.Set "next_link" .Permalink -}}
+    {{- $.Scratch.Set "next_title" .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if or ($.Scratch.Get "next_link") ($.Scratch.Get "prev_link") -}}
+  <nav id="post-nav" class="row">
+    {{- if ($.Scratch.Get "prev_link") -}}
+    <a href="{{ $.Scratch.Get "prev_link" }}" rel="prev" class="small-full medium-half pagination small-text-center medium-text-left"><span class="fa fa-chevron-circle-left"></span> {{ $.Scratch.Get "prev_title" }}</a>
+    {{- else -}}
+    <div class="small-hide medium-half"></div>
+    {{- end -}}
+    {{- if ($.Scratch.Get "next_link") -}}
+    <a href="{{ $.Scratch.Get "next_link" }}" rel="next" class="small-full medium-half pagination small-text-center medium-text-right">{{ $.Scratch.Get "next_title" }} <span class="fa fa-chevron-circle-right"></span></a>
+    {{- end -}}
+  </nav>
+{{- end -}}
+{{- end -}}

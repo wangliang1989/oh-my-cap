@@ -1,0 +1,25 @@
+{{- .Scratch.Set "sitevar" $.Site -}}
+{{- partial "css/color/parse_color.css" . -}}
+{{- .Scratch.Set "label" "main_bg" -}}
+{{- partial "css/color/detect_light_or_dark.css" .Scratch -}}
+{{ $scr := .Scratch }}
+{{- with .Site.Params.widgets.patreon -}}
+<div class="widget">
+	<header>
+		{{- range $.Site.Data.members -}}
+      {{- $scr.Add "membercount" 1 -}}
+		{{- end -}}
+		<span class="widget-header"><span class="fa fa-credit-card"></span> Support {{ if gt ($scr.Get "membercount") 1 }}Us{{ else }}Me{{ end }} On</span>
+	</header>
+	<a href="https://patreon.com/{{ . }}">
+
+		{{- if ($scr.Get "main_bg_is_dark") -}}
+			{{- $scr.Set "patreon_banner_url" "images/patreon/patreon_white.svg" -}}
+		{{- else -}}
+			{{- $scr.Set "patreon_banner_url" "images/patreon/patreon_black.svg" -}}
+		{{- end -}}
+		{{- with $.Site.Params.widgets.patreon_banner -}}{{- $scr.Set "patreon_banner_url" . -}}{{- end -}}
+    <img id="patreon-banner" src="{{ $scr.Get "patreon_banner_url" | absURL }}" alt="Patreon Banner" title="Support me on Patreon!" />
+  </a>
+</div>
+{{- end -}}

@@ -1,0 +1,53 @@
+<div class="row">
+  {{ $type := .Get "type" }}
+  {{ $name := .Get "name" }}
+  {{ $has_other := (eq (.Get "add_other") "true") }}
+  {{ $.Scratch.Set "form-input-type" $type }}
+  <div class="row-item small-full small-text-center medium-third medium-text-right">
+    {{ if eq $type "select" }}
+    <label for="{{ $name }}">
+    {{ end }}
+    <p>{{ .Get "label" }}</p>
+    {{ if eq $type "select" }}
+    </label>
+    {{ end }}
+  </div>
+  <div class="row-item small-full small-text-left medium-two-thirds medium-text-left">
+    {{ if and (and (ne $type "radio") (ne $type "checkbox")) (ne $type "select") }}
+    <p>Unknown multiple-choice input type "{{ $type }}"</p>
+    {{ else if eq $type "select" }}
+    <select name="{{ $name }}"{{ if eq (.Get "required") "true" }} required{{ end }}>
+      <option value="">[Choose one]</option>
+      {{ .Inner | safeHTML }}
+      {{ if $has_other -}}
+      <option value="other">Other</option>
+      {{- end }}
+    </select>
+    {{ else }}
+    <ul>
+    {{ .Inner | safeHTML }}
+    {{ if $has_other }}
+      <li>
+        <input id="{{ $name }}-other" type="{{ $type }}" name="{{ $name }}" value="other">
+        <label for="{{ $name }}-other">
+          Other
+        </label>
+        <input class="hide" type="text" name="{{ $name }}-other-value"/>
+      </li>
+    {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+</div>
+{{ if and (eq $type "select") $has_other }}
+<div class="row">
+  <div class="row-item small-full small-text-center medium-third medium-text-right">
+    <label for="{{ $name }}_other_value">
+      <p>If "Other", please specify:</p>
+    </label>
+  </div>
+  <div class="row-item small-full small-text-center medium-two-thirds medium-text-right">
+    <input type="text" id="{{ $name }}_other_value" name="{{ $name }}_other_value" />
+  </div>
+</div>
+{{ end }}

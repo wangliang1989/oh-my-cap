@@ -1,0 +1,18 @@
+{{- $floatstr := .Get "floatstr" -}}
+{{- $beforestr :=  index (findRE "[0-9]*\\." $floatstr 1) 0 -}}
+{{- $beforestr := replace $beforestr "." "" -}}
+{{- $blen := countrunes $beforestr -}}
+{{- .Set "floatbefore" 0.0 -}}
+{{- if gt $blen 0 -}}{{- .Set "floatbefore" (mul (int $beforestr) 1.0) -}}{{- end -}}
+{{- $afterstr := index (findRE "\\.[0-9]*" $floatstr 1) 0 -}}
+{{- $afterstr := replace $afterstr "." "" -}}
+{{- $alen := countrunes $afterstr -}}
+{{- .Set "floatafter" 0.0 -}}
+{{- if gt $alen 0 -}}
+  {{- .Set "base" 10 -}}
+  {{- .Set "exponent" $alen -}}
+  {{- partial "utility/power.html" . -}}
+  {{- $divisor := mul (.Get "result") 1.0 -}}
+  {{- .Set "floatafter" (div (int $afterstr) $divisor) -}}
+{{- end -}}
+{{- .Set "floatval" (add (.Get "floatbefore") (.Get "floatafter")) -}}

@@ -1,0 +1,7 @@
+{{- if or (.HasPrev) (.HasNext) -}}
+<ul class="menu">
+  <li class="{{ if .HasPrev }}"><a class="pagination" href="{{ .Prev.URL | absLangURL }}">{{else}}disabled">{{end}} <span class="fa fa-chevron-circle-left"></span> Previous{{ if .HasPrev }}</a>{{end}}</li>
+  <li class="pagination disabled">{{ .PageNumber }}</li>
+  <li class="{{ if .HasNext }}"><a class="pagination" href="{{ .Next.URL | absLangURL }}">{{else}}disabled">{{end}}Next <span class="fa fa-chevron-circle-right"></span>{{ if .HasNext }}</a>{{end}}</li>
+</ul>
+{{- end -}}

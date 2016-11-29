@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+{{ range $.Site.Data.events }}
+BEGIN:VEVENT
+UID:{{ md5 .name }}{{ md5 .startDatetime }}@{{ .Site.BaseURL }}
+SUMMARY:{{ .name }}
+DTSTART;TZID=America/Los_Angeles:{{ dateFormat "20060102T150405" .startDatetime }}
+DTEND;TZID=America/Los_Angeles:{{ dateFormat "20060102T150405" .endDatetime }}
+LOCATION:{{ .location }}
+DESCRIPTION: {{ .description }}
+STATUS:CONFIRMED
+SEQUENCE:3
+BEGIN:VALARM
+TRIGGER:-PT10M
+DESCRIPTION:Reminder
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+{{ end }}

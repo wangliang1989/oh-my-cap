@@ -1,0 +1,16 @@
+{{ define "main_content" }}
+  <main id="post-list" class="row-item small-full medium-two-thirds">
+    {{- if not .IsHome -}}
+		<header id="page-header">
+			<h1 id="page-title">{{ .Data.Singular | title }}: {{ .Title }}</h1>
+		</header>
+		{{- end -}}
+    {{- .Content -}}
+    {{- if (or (not (isset .Params "hide_list")) (not .Params.hide_list)) -}}
+  		{{- range .Paginator.Pages -}}
+  		  {{ partial "list_item.html" . }}
+  		{{- end -}}
+      {{ partial "pagination.html" .Paginator }}
+    {{- end -}}
+  </main>
+{{- end -}}

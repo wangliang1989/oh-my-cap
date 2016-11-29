@@ -1,0 +1,24 @@
+#post-list article {
+  border-bottom: 1px solid {{ .Get "body_text" }};
+}
+
+#post-list .media-object-section {
+  padding: 0;
+}
+
+#post-list article h4 {
+  font-weight: bold;
+}
+
+/* Site main - pagination */
+
+.pagination .pagination-previous a,
+.pagination .pagination-next a {
+  color: {{ .Get "accent" }};
+}
+
+.pagination .pagination-previous a:hover,
+.pagination .pagination-next a:hover {
+  color: {{ .Get "header_text" }};
+  background-color: {{ .Get "accent" }};
+}

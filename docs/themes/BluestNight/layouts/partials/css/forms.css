@@ -1,0 +1,43 @@
+.form-container {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.form-container input:not([type="radio"]):not([type="checkbox"]), .form-container textarea, .form-container select {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  background-color: {{ .Get "alt_bg" }};
+  color: {{ .Get "alt_body_text" }};
+  border: none;
+  padding: 0.5rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline-color: {{ .Get "accent" }};
+}
+
+.form-container label {
+  vertical-align: middle;
+}
+
+.form-container textarea { resize: none; }
+
+.form-container ul {
+  list-style-type: none;
+}
+
+.form-container button {
+  border: none;
+}
+@media only screen and (min-width: 640px) {
+  .form-container button[type="submit"] {
+    margin-left: auto;
+  }
+}
+
+input[type="checkbox"][value="other"]:checked ~ input.hide,
+input[type="radio"][value="other"]:checked ~ input.hide {
+  display: inline;
+}
