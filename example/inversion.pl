@@ -1,16 +1,22 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+require config;
 
 @ARGV >= 1 or die "Usage: perl $0 dirname";
 my @dir = @ARGV;
 
-my $weight = "weight.dat";# 指定权重文件
 foreach my $event (@dir){
+    my %pars = read_config($event);
+    my $weight = $pars{'-Z'};
     die "no weight file\n" if !-e "$event/$weight";
 
-    for (my $depth = 5; $depth <= 30; $depth = $depth + 5) {
+    # 获取反演的震源深度
+    my @depth = split /\s+/, $pars{'DEPTH'};
+    foreach my $depth (@depth) {
         $depth = "0$depth" if $depth < 10;
-        system "cap.pl -H0.2 -P0.3 -S5/10/0 -T35/70 -D2/1/0.5 -C0.05/0.3/0.02/0.1 -W1 -X10 -Mmodel_$depth/5.0 -Z$weight $event";
+        # deal with -M option
+        my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";
+        system "cap.pl $cap_args $event";
     }
 }
