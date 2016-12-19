@@ -228,7 +228,7 @@ sub ps_arr {
    my ($j, $tp, $ts, $pa, $sa, $dn, @aaa);
 
    # calculate arrival time for P and S
-   open(TRAV,"| trav > junk.$s_depth.$src.p") or die "couldn't run trav\n";
+   open(TRAV,"| trav > junk.$s_depth.$dist[0].$src.p") or die "couldn't run trav\n";
    printf TRAV "%d %d %d\n", $num_layer,$src_layer,$rcv_layer;
    for ($j=0;$j<$num_layer;$j++) {
       printf TRAV "%11.4f %11.4f\n",$th[$j],$vp[$j];
@@ -238,7 +238,7 @@ sub ps_arr {
        printf TRAV "%10.4f\n",$_*$deg2km;
    }
    close(TRAV);
-   open(TRAV,"| trav > junk.$s_depth.$src.s") or die "couldn't run trav\n";
+   open(TRAV,"| trav > junk.$s_depth.$dist[0].$src.s") or die "couldn't run trav\n";
    printf TRAV "%d %d %d\n", $num_layer,$src_layer,$rcv_layer;
    for ($j=0;$j<$num_layer;$j++) {
       printf TRAV "%11.4f %11.4f\n",$th[$j],$vs[$j];
@@ -249,7 +249,7 @@ sub ps_arr {
    }
    close(TRAV);
 
-   open(TRAV,"paste junk.$s_depth.$src.p junk.$s_depth.$src.s |");
+   open(TRAV,"paste junk.$s_depth.$dist[0].$src.p junk.$s_depth.$dist[0].$src.s |");
    $j=0;
    while (<TRAV>) {
      @aaa = split;
