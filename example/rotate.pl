@@ -65,11 +65,18 @@ foreach my $key (keys %sets) {
     my $begin = max($Zb, $Eb, $Nb) + $Zdelta;
     my $end = min($Ze, $Ee, $Ne) - $Zdelta;
 
-    # 输出文件名为 NET.STA.LOC.[RTZ]
-    my $prefix = substr $key, 0, length($key)-2;
-    $R = $prefix."r";
-    $T = $prefix."t";
-    $Z0 = $prefix."z";
+    # 如果 LOC 具有区分文件的意义输出文件名为 NET_STA_LOC.[RTZ],否则为 NET_STA.[RTZ]
+    my $i = 12;
+    foreach (keys %sets) {
+        my ($net1, $sta1) = split m/\./;
+        my ($net2, $sta2) = split m/\./, $key;
+        $i = int ($i / 2) if (($net1 eq $net2) and ($sta1 eq $sta2));
+    }
+    my $prefix = substr $key, 0, length($key) - $i;#如果想一律为 NET_STA.[RTZ]，此处$i = 3
+    $prefix =~ s/\./_/g;
+    $R = $prefix.".r";
+    $T = $prefix.".t";
+    $Z0 = $prefix.".z";
 
     print SAC "cut $begin $end \n";
     print SAC "r $E $N \n";
