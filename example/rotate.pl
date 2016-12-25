@@ -65,11 +65,12 @@ foreach my $key (keys %sets) {
     my $begin = max($Zb, $Eb, $Nb) + $Zdelta;
     my $end = min($Ze, $Ee, $Ne) - $Zdelta;
 
-    # 输出文件名为 NET.STA.LOC.[RTZ]
-    my $prefix = substr $key, 0, length($key)-2;
-    $R = $prefix."r";
-    $T = $prefix."t";
-    $Z0 = $prefix."z";
+    # 输出文件名为 NET_STA_LOC.[RTZ]
+    my $prefix = substr $key, 0, length($key)-3;
+    $prefix =~ s/\./_/g;
+    $R = $prefix.".r";
+    $T = $prefix.".t";
+    $Z0 = $prefix.".z";
 
     print SAC "cut $begin $end \n";
     print SAC "r $E $N \n";
