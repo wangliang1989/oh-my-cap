@@ -8,7 +8,7 @@ $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
 my ($dir) = @ARGV;
 my %pars = read_config($dir);
-my $delta = $pars{'DT'};
+my $delta = $pars{'RESAMPLE'};
 
 chdir $dir;
 
