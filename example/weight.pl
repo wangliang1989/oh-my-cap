@@ -33,6 +33,6 @@ foreach my $dir (@dir){
         ($w1, $w2, $w3, $w4, $w5) = (0, 0, 0, 0, 0) if $t9 != -12345;
         printf OUT "%10s %8d %1d %1d %1d %1d %1d %5.1f %5.1f\n", $net_sta, $dist, $w1, $w2, $w3, $w4, $w5, $tp, $ts;
     }
-    print "===== $dir WEIGHT FILE =====\n";
+    print "weight.dat created in $dir\n";
     chdir "..";
 }
