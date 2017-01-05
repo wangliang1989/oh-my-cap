@@ -1,2 +1,4 @@
-junk.p
-junk.s
+junk.*
+*.fk
+!model.fk
+*/
