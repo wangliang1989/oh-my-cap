@@ -17,6 +17,8 @@ foreach my $event (@dir){
         $depth = "0$depth" if $depth < 10;
         # deal with -M option
         my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";
+        print "cap.pl $cap_args $event\n";
         system "cap.pl $cap_args $event";
+        print "\n";
     }
 }
