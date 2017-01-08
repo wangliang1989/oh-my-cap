@@ -20,14 +20,18 @@ foreach my $Zfile (glob "*Z.SAC") {
     my (undef, $evdp, $gcarc, $b, $e) = split m/\s+/, `saclst evdp gcarc b e f $Zfile`;
     my @time = split m/\s+/, `taup_time -mod prem -ph P,p,Pn -h $evdp -deg $gcarc --time`;
     my $t0 = min @time;
-    my $start = max (0, $b, ($t0 - 10));
+    my $start = max (0, $b, ($t0 - 30));
     my $end = min ($e, ($t0 + 600));
 
-    print SAC "cut $start $end\n";
-    print SAC "r ${net}.${sta}.*.SAC\n";
-    print SAC "ch t0 $t0\n";
-    print SAC "ch kt0 Pnl\n";
-    print SAC "write over\n";
+    if ($start < $end) {
+        print SAC "cut $start $end\n";
+        print SAC "r ${net}.${sta}.*.SAC\n";
+        print SAC "ch t0 $t0\n";
+        print SAC "ch kt0 Pnl\n";
+        print SAC "write over\n";
+    } else {
+        unlink glob "${net}.${sta}.*.SAC";
+    }
 }
 print SAC "q\n";
 close(SAC);
