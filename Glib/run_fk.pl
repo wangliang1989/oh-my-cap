@@ -45,4 +45,6 @@ foreach my $fname (@config){
         }
     }
     unlink glob "junk.*";
+
+    chdir ".." or die;
 }

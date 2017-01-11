@@ -60,4 +60,6 @@ foreach my $fname (@config){
     }
     $pm -> wait_all_children;
     unlink glob "junk.*";
+
+    chdir ".." or die;
 }
