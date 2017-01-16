@@ -10,7 +10,9 @@ foreach my $event (@dir) {
     my %pars = read_config($event);
     chdir "$event" or die "can not open dir $event\n";
     system "grep -h Event $pars{'MODEL'}_*.out > junk.out";
-    system "depth.pl junk.out $event > depth.ps";
+    system "depth.pl junk.out $event > $pars{'MODEL'}_depth.ps";
+    system "ps2raster -A -E1080 -P -Tf $pars{'MODEL'}_depth.ps";
+    unlink "$pars{'MODEL'}_depth.ps";
     unlink "junk.out";
     chdir "..";
 }

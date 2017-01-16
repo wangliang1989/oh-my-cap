@@ -18,7 +18,10 @@ foreach my $event (@dir){
         # deal with -M option
         my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";
         print "cap.pl $cap_args $event\n";
+        unlink "$event/$pars{'MODEL'}_${depth}.ps";
         system "cap.pl $cap_args $event";
+        system "ps2raster -P -Tf $event/$pars{'MODEL'}_${depth}.ps";
+        unlink "$event/$pars{'MODEL'}_${depth}.ps";
         print "\n";
     }
 }
