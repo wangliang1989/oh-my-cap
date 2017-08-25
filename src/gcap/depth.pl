@@ -66,7 +66,7 @@ foreach $eve (@aa){
   for($l=1;$l<$ii;$l++) {
     $aa = `radpttn 1 $strike[$l] $dip[$l] $rake[$l] $iso[$l] $clvd[$l] | head -1`;
     @mt = split(' ', $aa);
-    printf PLT "%6.1f %6.1f 0 %s %s %s %s %s $f %f 17 0 0 %s\n",$dep[$l],($rms[$l]-$min)/($min/$dof),@mt[6,1,4,3],-$mt[5],-$mt[2],$mo[$l];
+    printf PLT "%6.1f %6.1f 0 %s %s %s %s %s %f 17 0 0 %s\n",$dep[$l],($rms[$l]-$min)/($min/$dof),@mt[6,1,4,3],-$mt[5],-$mt[2],$mo[$l];
   }
   close(PLT);
 
