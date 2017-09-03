@@ -26,7 +26,7 @@ Oh My CAP 项目基于 gCAP 建立，对 gCAP 的核心代码只做了微量修�
 
 1. 理清了程序的依赖关系，最大限度地提供自动安装脚本和安装程序源文件和手把手的安装指南；
 2. 手把手的示例演示，和每一个步骤的讲解；
-3. 调用 gCAP 的现成 Perl 脚本；
+3. 提供调用 gCAP 的现成 Perl 脚本；
 4. 可以清楚查看对原 gCAP 代码做了哪些具体修改（这些修改的记录并非靠人力记录，而是依托 Github 的版本对照功能自动实现），
 
 ## 学习指南
@@ -47,9 +47,9 @@ Oh My CAP 项目基于 gCAP 建立，对 gCAP 的核心代码只做了微量修�
 
 ## 联系方式
 
-__[王亮](http://wangliang.one)__  成都理工大学
+__[王亮](http://wangliang.one)__      成都理工大学
 
-Email： [wangliang.one@foxmail.com]()
+Email： wangliang.one@foxmail.com
 
 CAP 讨论 QQ 群：580712662
 
