@@ -19,6 +19,7 @@ fk 是 Prof. Lupei Zhu 写的一个计算水平分层介质中理论地震图的
 - 删除了自带的示例
 - 删除了无用的临时文件
 - 修改 Makefile 使得其更通用
+- 修改输出文件的命名规则以适应并行计算
 
 详细修改历史见： <https://github.com/wangliang1989/oh-my-cap/commits/master/src/fk>
 

@@ -6,7 +6,7 @@ enable_toc = true
 weight = 3
 +++
 
-对于初学者。本安装文档的每一个字都需要阅读！
+对于初学者。本安装文档的每一个字都需要阅读！因为版权原因，我无法提供全部安装包，有困难请加群 580712662。
 
 以下安装步骤在 CentOS 上验证通过。在其他 Linux 发行版及 Mac 上安装步骤类似。
 因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以本安装指南不适用于 Windows。
@@ -31,9 +31,9 @@ MacOS 用户推荐使用 [Homebrew](http://brew.sh/index_zh-cn.html) 安装。
 
 ## SAC
 
-本项目依赖于 SAC **v101.6a**。
+Oh My CAP 依赖 SAC **v101.6a**。
 
-SAC 是非开源软件，需要向 IRIS 申请源码包或者二进制包。申请地址是 <http://ds.iris.edu/ds/nodes/dmc/forms/sac/> 。
+SAC 是免费而非开源软件。根据授权协议，我不能直接向你提供，你需要自己向 IRIS 申请源码包或者二进制包。申请地址是 <http://ds.iris.edu/ds/nodes/dmc/forms/sac/> 。你要注意，这个审核是人工审核，别和 IRIS 耍花招。
 
 SAC 的安装参考：
 
@@ -43,14 +43,14 @@ SAC 的安装参考：
 
 ## GMT
 
-本项目依赖于 GMT 4，不支持 GMT 5。
+gCAP 依赖 GMT4。
 
 GMT4 的安装请参考：
 
 - [GMT 4 在 Linux 上的安装](http://seisman.info/install-gmt4-under-linux.html)
 - [GMT 4 在 Mac 上的安装](http://seisman.info/install-gmt4-under-mac.html)
 
-GMT 5用户可以参考 [GMT4 与 GMT5 双版本共存](http://seisman.info/multiple-versions-of-gmt.html) 一文，以保证系统中存在GMT4和GMT5两个版本且不互相影响。
+GMT5 用户可以参考 [GMT4 与 GMT5 双版本共存](http://seisman.info/multiple-versions-of-gmt.html) 一文，以保证系统中存在 GMT4 和 GMT5 两个版本且互不影响。
 
 ## TauP
 
@@ -58,8 +58,8 @@ GMT 5用户可以参考 [GMT4 与 GMT5 双版本共存](http://seisman.info/mult
 
 ## 下载 Oh My CAP
 
-1. [zip 格式压缩包](https://github.com/wangliang1989/oh-my-cap/archive/v1.0.zip)
-2. [tar.gz 格式压缩包](https://github.com/wangliang1989/oh-my-cap/archive/v1.0.tar.gz)
+1. [zip 格式压缩包](https://github.com/wangliang1989/oh-my-cap/archive/v1.1.zip)
+2. [tar.gz 格式压缩包](https://github.com/wangliang1989/oh-my-cap/archive/v1.1.tar.gz)
 
 ## fk
 
@@ -88,7 +88,7 @@ gcap 需要使用 pssac 绘制地震波形。
 gCAP 使用了商业软件 Numerical Recipes（简称 NR）中的一些子函数，
 包括 `matrix` 、 `free_matrix` 、 `free_convert_matrix` 、 `jacobi` 和 `eigsrt` 。
 由于版权原因，我不能把这几个子函数的源码直接放到这里。
-用户应自行获取缺失的源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
+用户应自行购买缺失的源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
 再在该目录下进行编译:
 
     $ make
@@ -104,4 +104,12 @@ gCAP 使用了商业软件 Numerical Recipes（简称 NR）中的一些子函数
     export PATH=$OH_MY_CAP/src/pssac:${PATH}
     export PATH=$OH_MY_CAP/src/gcap:${PATH}
 
-**不同 Shell 的配置文件可能不同，请自行解决！**
+**通常系统的默认 shell 都是 Bash，如果有你自行更换默认 Shell 的情况（如Csh），那么设置的方式可能不同，请自行解决！**
+
+## 安装 Perl 的并行模块
+
+计算格林函数比较耗时，Oh My CAP 已经实现用并行计算格林函数：
+
+    cpanm Parallel::ForkManager
+
+cpanm 是需要事先安装的，安装方法见[Perl 多版本共存之 plenv](http://seisman.info/perl-plenv.html)

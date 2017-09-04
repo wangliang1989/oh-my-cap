@@ -17,6 +17,7 @@ $ cd ../example/
 
 # 对示例数据进行预处理
 $ perl process.pl 20080418093658
+# 警告 `WARNING potential for aliasing. new delta: 0.200000 data delta: 0.025000` 可忽略
 
 # 生成权重文件
 $ perl weight.pl 20080418093658
@@ -29,8 +30,8 @@ $ perl inversion.pl 20080418093658
 $ perl get_depth.pl 20080418093658
 $ gs 20080418093658/depth.ps
 ```
-下图展示了震源深度固定为 15 km 时的震源机制反演结果（即 `20080418093658/model_15.ps`）：
+下图展示了震源深度固定为 15 km 时的震源机制反演结果（即 `20080418093658/model_15.pdf`）：
 ![15 km的反演结果](/images/model_15.png)
 
-下图展示了不同震源深度的反演结果（即 `20080418093658/depth.ps`）：
+下图展示了不同震源深度的反演结果（即 `20080418093658/depth.pdf`）：
 ![深度反演结果](/images/model_depth.png)

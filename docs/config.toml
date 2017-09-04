@@ -18,8 +18,6 @@ enableRobotsTXT = true # Suggested, enable robots.txt file
     post_navigation = false
 
 [Params.widgets]
-    tags = true
-    tags_counter = true
     recent_articles = true
     search = true
 
