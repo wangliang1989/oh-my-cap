@@ -1,0 +1,20 @@
+{{- $page := .page -}}
+{{- $site := .site -}}
+{{- range sort .menu -}}
+  <li class="no-select" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <input type="checkbox" id="nav-{{ .Name | plainify | urlize }}" class="hide"/>
+    <a class="main-nav button{{if or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }} active{{end}}" tabindex="0" href="{{ .URL | absLangURL }}{{ index (findRE "\\#.*" .URL 1) 0 }}" >
+      <span>{{ .Name | upper }}</span>
+      {{- if .HasChildren -}}
+      <label for="nav-{{ .Name | plainify | urlize }}">
+        &nbsp;&nbsp;<span class="nav-arrow">&#9656;</span>
+      </label>
+      {{- end -}}
+    </a>
+    {{- if .HasChildren -}}
+    <ul>
+    {{ partial "nested_menu.html" (dict "menu" .Children "page" $page "site" $site) }}
+    </ul>
+    {{- end -}}
+  </li>
+{{- end -}}

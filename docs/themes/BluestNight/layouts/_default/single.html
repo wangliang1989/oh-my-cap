@@ -1,0 +1,109 @@
+{{ define "main_content" }}
+<main class="row-item small-full medium-two-thirds" {{ if eq .Section "post" }}itemscope itemtype="http://schema.org/Blog"{{ end }}>
+  <article id="post-article" {{ if eq .Section "post" }}itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting"{{ else }}itemscope itemtype="http://schema.org/Article"{{ end }}{{ if .Params.tags }} itemref="keywords desc"{{ else }} itemref="desc"{{ end }}>
+    <header id="page-header">
+      <h1 itemprop="headline">{{ .Title }}</h1>
+      {{- if or (or (not .Lastmod.IsZero) (not .Date.IsZero)) .Params.categories -}}
+      <p id="post-metadata" class="row">
+        {{- if not .Date.IsZero -}}
+        <span class="row-item">
+          <span class="fa fa-clock-o"></span>
+          {{ if not .Date.IsZero -}}
+          <time datetime="{{ .Date.Format "2006-01-02" }}" content="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">Published: {{ .Date.Format "January 02, 2006" }}</time>
+          {{- end -}}
+        </span>
+        {{- end -}}
+        {{- if not .Lastmod.IsZero -}}
+        <span class="row-item">
+          <span class="fa fa-clock-o"></span>
+          {{ if not .Lastmod.IsZero -}}
+          <time datetime="{{ .Lastmod.Format "2006-01-02" }}" content="{{ .Lastmod.Format "2006-01-02" }}" itemprop="dateModified">Last Updated: {{ .Lastmod.Format "January 02, 2006" }}</time>
+          {{- end -}}
+        </span>
+        {{- end -}}
+        {{- if .Params.categories -}}
+        <span class="row-item">
+          <span class="fa fa-folder"></span>
+          {{ range $index, $category := .Params.categories }}{{ if gt $index 0 }}, {{ end }}<a href="{{ "categories/" | absLangURL }}{{ $category | urlize | lower }}" rel="category">{{ . | humanize | title }}</a>{{ end }}
+        </span>
+        {{- end -}}
+        {{- if not .Params.hide_readingtime -}}
+        <span class="row-item">Estimated reading time: ~<span itemprop="timeRequired">{{ .ReadingTime }} minutes</span></span>
+        {{- end -}}
+      </p>
+      {{ end }}
+    </header>
+    {{ with .Params.alert -}}
+      <div class="alert small-full">
+        <p>{{ . | markdownify }}</p>
+      </div>
+    {{- end }}
+    <div id="post-content">
+      {{- if .Params.thumbnail -}}
+      <figure class="thumbnail">
+        <img src="{{ .Params.thumbnail | absURL }}" alt="{{ .Title }}">
+      </figure>
+      {{- end -}}
+      {{ if and .Params.enable_toc (eq .Params.enable_toc true) }}{{ .TableOfContents }}{{ end }}
+      <span itemprop="articleBody">{{ .Content }}</span>
+    </div>
+    {{- if .Params.tags -}}
+    <div id="post-tags">
+    	<ul class="menu">
+        <li class="row-item">{{if (eq (len $.Site.Taxonomies.tags) 1) }}<i class="fa fa-tag"></i>{{ else }}<i class="fa fa-tags"></i>{{ end }}&nbsp;&nbsp;</li>
+    		{{- range .Params.tags -}}
+    		<li itemprop="relatedUrl" itemscope itemtype="http://schema.org/URL">
+    			{{- $.Scratch.Set "link" "/tags/" -}}
+    			{{- $.Scratch.Add "link" . -}}
+    			<a class="row-item button" href="{{ $.Scratch.Get "link" | lower | urlize | absLangURL }}" rel="tag" itemprop="url">{{ . | humanize | lower }}</a>
+    		</li>
+    		{{- end -}}
+    	</ul>
+    </div>
+    {{- end -}}
+    {{- if and (.Site.Params.authorbox) (not .Params.hide_authorbox) -}}
+    {{- with $.Site.Params.author -}}{{- $.Scratch.Set "author" . -}}{{- end -}}
+    {{- with .Params.author -}}{{- $.Scratch.Set "author" . -}}{{- end -}}
+    {{- $author := $.Scratch.Get "author" | default "" -}}
+    {{- if ne $author "" -}}
+    {{- range $.Site.Data.members -}}
+    	{{- if eq .Name $author -}}
+    	<div id="authorbox" class="row vcenter memberbox" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    		<div class="row-item member-avatar" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+    				<img alt="{{ .Name }} avatar" src="{{ with .Img }}{{ . | absURL }}{{ else }}{{ "images/profile.jpg" | absURL }}{{ end }}" itemprop="contentUrl" />
+    		</div>
+    		<div class="row-item member-bio">
+    			<div>
+    				<span class="widget-title">About {{ with .URL }}<a href="{{ . | absLangURL }}" rel="author">{{ end }}<span itemprop="name">{{ .Name }}</span>{{ if .URL }}</a>{{ end }}</span>
+    			</div>
+    			<p itemprop="description">
+    				{{- .Bio -}}
+    			</p>
+    		</div>
+    	</div>
+    	{{- end -}}
+    {{- end -}}
+    {{- end -}}
+    {{- end -}}
+  </article>
+
+  {{ partial "next_prev_post.html" . }}
+
+  {{- if and (or $.Site.Params.hashover $.Site.Params.muut) (not .Params.disable_comments) -}}
+  <div class="post-comments">
+    {{- if (.Site.Params.hashover) -}}
+      <div id="hashover"></div>
+      <script>var canon_url = (document.querySelector('link[rel="canonical"]') != null) ? '?canon_url=' + encodeURIComponent(document.querySelector('link[rel="canonical"]').getAttribute('href')) : ''; document.write('<script src="/hashover.php' + canon_url + '"><\/script>');</script>
+      <script defer type="text/javascript" src="{{ $.Site.BaseURL }}hashover.php"></script>
+      <script defer type="text/javascript" src="{{ $.Site.BaseURL }}js/hashoverride.js"></script>
+      <noscript>You must have JavaScript enabled to use the comments.</noscript>
+    {{- else -}}
+      {{- with .Site.Params.muut -}}
+        <a href="https://muut.com/i/{{ . }}/comments" class="muut" type="dynamic">Comments</a>
+        <script src="//cdn.muut.com/1/moot.min.js"></script>
+      {{- end -}}
+    {{- end -}}
+  </div>
+  {{- end -}}
+</main>
+{{ end }}

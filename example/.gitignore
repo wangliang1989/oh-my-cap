@@ -6,4 +6,5 @@ RESP.*
 .gmtdefaults4
 *.out
 *.ps
+*.pdf
 weight*

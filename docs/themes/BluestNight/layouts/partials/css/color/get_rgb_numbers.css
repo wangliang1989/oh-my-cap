@@ -1,0 +1,52 @@
+{{- $label := .Get "label" -}}
+{{- $color := .Get $label -}}
+{{- if (hasPrefix $color "#") -}}
+  {{- if lt (len $color) 7 -}}
+    {{- .Set "redstr" (substr $color 1 1) -}}
+    {{- .Set "greenstr" (substr $color 2 1) -}}
+    {{- .Set "bluestr" (substr $color 3 1) -}}
+    {{- /* If has alpha */ -}}
+    {{- if eq (len $color) 5 -}}
+      {{- .Set "alphastr" (substr $color 4 1) -}}
+    {{- else -}}
+      {{- .Set "alphastr" "f" -}}
+    {{- end -}}
+  {{- else -}}
+    {{- .Set "redstr" (substr $color 1 2) -}}
+    {{- .Set "greenstr" (substr $color 3 2) -}}
+    {{- .Set "bluestr" (substr $color 5 2) -}}
+    {{- /* If has alpha */ -}}
+    {{- if eq (len $color) 9 -}}
+      {{- .Set "alphastr" (substr $color 7 2) -}}
+    {{- else -}}
+      {{- .Set "alphastr" "ff" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- partial "css/color/convert_hex.css" . -}}
+{{- else if (hasPrefix $color "rgba") -}}
+  {{- $str := .Get $label -}}
+  {{- $str := trim (replace $str "rgba(" "") " \n" -}}
+  {{- $scr := . -}}
+  {{- .Set "str" $str -}}
+  {{- range $looplabel := slice "red" "green" "blue" -}}
+    {{- $substr := substr (index (findRE "[0-9]{1,3}\\," ($scr.Get "str") 1) 0) 0 -1 -}}
+    {{- $scr.Set $looplabel (int $substr) -}}
+    {{- $scr.Set "str" (trim (substr ($scr.Get "str") (add (countrunes $substr) 1)) ", ") -}}
+  {{- end -}}
+  {{- $str := substr (.Get "str") 0 -1 -}}
+  {{- .Set "floatstr" $str -}}
+  {{- partial "utility/float.html" . -}}
+  {{- .Set "alpha" (.Get "floatval") -}}
+{{- else if (hasPrefix $color "rgb") -}}
+  {{- $str := .Get $label -}}
+  {{- $str := trim (replace $str "rgb(" "") -}}
+  {{- $scr := . -}}
+  {{- range $looplabel := slice "red" "green" -}}
+    {{- $substr := findRE "$[0-9]{1,3}\\," $str 1 -}}
+    {{- $scr.Set $looplabel (int $substr) -}}
+    {{- $str := substr $str (add (countrunes $substr) 1) -}}
+  {{- end -}}
+  {{- $str := substr $str 0 -1 -}}
+  {{- .Set "blue" (int $str) -}}
+{{- else -}}
+{{- end -}}

@@ -1,0 +1,10 @@
+<table class="responsive">
+  <thead>
+    {{ range $header := .Params -}}
+    <th>{{ $header }}</th>
+    {{- end -}}
+  </thead>
+  <tbody>
+    {{ .Inner }}
+  </tbody>
+</table>

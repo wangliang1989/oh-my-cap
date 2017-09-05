@@ -1,0 +1,13 @@
+{{ define "main_content" }}
+  <main class="row-item small-full medium-two-thirds">
+    <article id="post-article">
+      <header id="post-header">
+        <h1>Page Not Found</h1>
+      </header>
+      <div id="post-content">
+  			<p>We’re sorry, we couldn’t find the page you were looking for. We’ll put our best sleuths to work finding it.</p>
+        <p>In the meantime, go ahead and {{ if $.Site.Params.widgets.search }}type what you were looking for in the <strong>search bar</strong>, or {{ end }}visit our <a href="{{ .Site.BaseURL }}">home page</a> and take a look around?<p>
+  		</div>
+    </article>
+  </main>
+{{ end }}

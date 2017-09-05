@@ -1,0 +1,24 @@
+{{ define "main_content" }}
+  <main class="row-item small-full medium-two-thirds">
+		<header id="page-header">
+			<h1 id="page-title">{{ .Title }}</h1>
+		</header>
+
+    {{ .Content }}
+
+    <ul id="taxonomy-list" class="row">
+      {{- $data := .Data -}}
+      {{ range $key, $val := .Data.Terms.Alphabetical }}
+      <div class="row-item small-full medium-half large-third">
+        <li class="taxonomy-item">
+          {{- $.Scratch.Set "link" "/" -}}
+          {{- $.Scratch.Add "link" $data.Plural -}}
+          {{- $.Scratch.Add "link" "/" -}}
+          {{- ($.Scratch.Add "link" $val.Name) -}}
+          <a href="{{ $.Scratch.Get "link" | urlize | absLangURL }}">{{ $val.Name }}</a> ({{ $val.Count }})
+        </li>
+      </div>
+      {{ end }}
+    </ul>
+  </main>
+{{- end -}}

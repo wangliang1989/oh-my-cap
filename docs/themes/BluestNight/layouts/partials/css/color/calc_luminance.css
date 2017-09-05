@@ -1,0 +1,15 @@
+{{- /* From https://stackoverflow.com/a/42921358 */ -}}
+{{- $scr := . -}}
+{{- .Set "label" "red" -}}
+{{- /* Sets "guess" to the 5th root of the number, up to 5 decimal places */ -}}
+{{- partial "utility/newtons_method.html" . -}}
+{{- .Set "luminance" (mul 0.2126 (mul (mul (.Get "red") (.Get "red")) (.Get "guess"))) -}}
+{{- .Set "label" "green" -}}
+{{- /* Sets "guess" to the 5th root of the number, up to 5 decimal places */ -}}
+{{- partial "utility/newtons_method.html" . -}}
+{{- .Add "luminance" (mul 0.7152 (mul (mul (.Get "green") (.Get "green")) (.Get "guess"))) -}}
+{{- .Set "label" "blue" -}}
+{{- /* Sets "guess" to the 5th root of the number, up to 5 decimal places */ -}}
+{{- partial "utility/newtons_method.html" . -}}
+{{- .Add "luminance" (mul 0.0722 (mul (mul (.Get "blue") (.Get "blue")) (.Get "guess"))) -}}
+{{- /* This comment removes extra newlines from output */ -}}

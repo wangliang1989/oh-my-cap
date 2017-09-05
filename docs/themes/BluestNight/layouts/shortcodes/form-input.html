@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="row-item small-full small-text-center medium-third medium-text-right">
+    <label for="{{- .Get "id" -}}">{{- .Get "label" -}}</label>
+  </div>
+  <div class="row-item small-full small-text-center medium-two-thirds medium-text-left">
+    {{- $type := .Get "type" -}}
+    {{- $id := .Get "id" -}}
+    {{- $name := (.Get "name" | default $id) -}}
+    {{- $placeholder := (.Get "placeholder" | default "") -}}
+    {{- $minlen := (.Get "minlength" | default "") -}}
+    {{- $maxlen := (.Get "maxlength" | default "") -}}
+    {{- $regex := (.Get "regex" | default "") -}}
+    {{- $value := (.Get "value" | default "") -}}
+
+    {{- $.Scratch.Set "optional-tags" "" -}}
+    {{- with $placeholder -}}{{- $.Scratch.Add "optional-tags" (add (add " placeholder=\"" .) "\"") -}}{{- end -}}
+    {{- with $regex -}}{{- $.Scratch.Add "optional-tags" (add (add " pattern=\"" .) "\"") -}}{{- end -}}
+    {{- with $value -}}{{- $.Scratch.Add "optional-tags" (add (add " value=\"" .) "\"") -}}{{- end -}}
+    {{- with $minlen -}}{{- $.Scratch.Add "optional-tags" (add (add " minlength=\"" .) "\"") -}}{{- end -}}
+    {{- with $maxlen -}}{{- $.Scratch.Add "optional-tags" (add (add " maxlength=\"" .) "\"") -}}{{- end -}}
+
+    {{- if or (or (eq $type "number") (eq $type "date")) (eq $type "range") -}}
+      {{- $min := (.Get "min" | default "") -}}
+      {{- $max := (.Get "max" | default "") -}}
+      {{- $step := (.Get "step" | default "") -}}
+      {{- with $min -}}{{- $.Scratch.Add "optional-tags" (add (add " min=\"" .) "\"") -}}{{- end -}}
+      {{- with $max -}}{{- $.Scratch.Add "optional-tags" (add (add " max=\"" .) "\"") -}}{{- end -}}
+      {{- with $step -}}{{- $.Scratch.Add "optional-tags" (add (add " step=\"" .) "\"") -}}{{- end -}}
+    {{- else if eq $type "file" -}}
+      {{- $accepts := .Get "accept" -}}
+      {{- $.Scratch.Add "optional-tags" (add (add " accept=\"" $accepts) "\"") -}}
+    {{- else if or (eq $type "file") (eq $type "email") -}}
+      {{- if eq (.Get "multiple") "true" -}}
+        {{- $.Scratch.Add "optional-tags" " multiple" -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if eq (.Get "required") "true" -}}
+      {{- $.Scratch.Add "optional-tags" " required" -}}
+    {{- end -}}
+
+    {{- if eq $type "textarea" -}}
+      <textarea id="{{ $id }}" name="{{ $id }}" rows="10"{{ ($.Scratch.Get "optional-tags" | safeHTMLAttr) }}></textarea>
+    {{- else if (and (and (and (ne $type "button") (ne $type "image")) (and (ne $type "submit") (ne $type "reset"))) (and (ne $type "checkbox") (ne $type "radio"))) -}}
+      <!-- Don't allow button types in this form -->
+      <input type="{{ $type }}" id="{{ $id }}" name="{{ $id }}"{{ ($.Scratch.Get "optional-tags" | safeHTMLAttr) }} />
+    {{- else -}}
+      <p>Invalid or unknown input type "{{ $type }}"</p>
+    {{- end -}}
+  </div>
+</div>

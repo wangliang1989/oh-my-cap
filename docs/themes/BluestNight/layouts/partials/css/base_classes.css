@@ -1,0 +1,76 @@
+/* Base classes */
+.row, .menu {
+  display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.menu {
+  font-size: 0.9rem;
+}
+
+.no-select {
+  /* Thanks to https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css#4407335 */
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.hcenter {
+  justify-content: center;
+}
+
+.vcenter {
+  align-items: center;
+}
+
+.row-item {
+  padding: 0 5px;
+  display: block;
+}
+
+.left  { order: -1; }
+.right { order:  1; }
+.hide { display: none; }
+
+.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+.pagination {
+  padding: 0.4rem 0.7rem;
+  font-weight: bold;
+}
+
+.pagination:hover {
+  background-color: {{ .Get "accent" }};
+  color: {{ .Get "header_text" }};
+}
+
+.button {
+  font-size: 0.8rem;
+  margin: 0.2rem;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  background-color: {{ .Get "alt_bg" }};
+  color: {{ .Get "alt_body_text" }};
+}
+
+.button:hover, .button:focus, .button:active, .button.active {
+  background-color: {{ .Get "accent" }};
+  color: {{ .Get "header_text" }} !important;
+  cursor: pointer;
+}

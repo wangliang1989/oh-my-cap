@@ -1,0 +1,53 @@
+/* Handwriting styles */
+
+.allura {
+  font-family: "allura";
+  font-size: 1.4em;
+}
+
+.calligraffiti {
+  font-family: "calligraffiti";
+  font-size: 1.1em;
+}
+
+.dancing-script {
+  font-family: "dancingscript";
+  font-size: 1.2em;
+}
+
+.euphoria-script {
+  font-family: "euphoriascript";
+  font-size: 1.4em;
+}
+
+.journal {
+  font-family: "journal";
+  font-size: 1.5em;
+}
+
+.kingthings-wrote {
+  font-family: "kingthings-wrote";
+  font-size: 0.9em;
+}
+
+.note-this {
+  font-family: "note-this";
+  font-size: 1.1em;
+}
+
+.vag-handwritten {
+  font-family: "vag-handwritten";
+  font-size: 1.2em;
+}
+
+.daniel {
+  font-family: "daniel";
+}
+
+.daniel-black {
+  font-family: "danielblack";
+}
+
+.handwriting p {
+  text-indent: 2em;
+}

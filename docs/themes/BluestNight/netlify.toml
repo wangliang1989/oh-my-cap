@@ -1,0 +1,35 @@
+# Global settings applied to the whole site.
+[build]
+  # Repo gets cloned to /opt/build/repo
+  # $base gets appended to the end and screws up the path
+  #base    = "shadow53.com"
+  publish = "public"
+  command = "cd exampleSite && hugo -t ../.. -d ../public"
+  [build.environment]
+    HUGO_VERSION = "0.25.1"
+
+# Production context: All deploys to the main
+# repository branch will inherit these settings.
+[context.production]
+  command = "cd exampleSite && hugo -t ../.. -d ../public"
+  #[context.production.environment]
+  #  ACCESS_TOKEN = "super secret"
+
+# Deploy Preview context: All Deploy Previews
+# will inherit these settings.
+#[context.deploy-preview.environment]
+#  ACCESS_TOKEN = "not so secret"
+
+# Branch Deploy context: All deploys that are not in
+# an active Deploy Preview will inherit these settings.
+[context.branch-deploy]
+  command = "cd exampleSite && hugo -t ../.. -b $DEPLOY_PRIME_URL -d ../public --buildDrafts"
+
+# Specific branch context: Deploys from this branch
+# will take these settings and override their
+# current ones.
+#[context.feature]
+#  command = "make feature"
+
+#[context."features/branch"]
+#  command = "gulp"

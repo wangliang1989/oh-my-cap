@@ -2,9 +2,8 @@
 use strict;
 use warnings;
 use List::Util qw(min max);
-$ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
-@ARGV == 1 or die "Usage: perl $0 dir\n";
+@ARGV == 1 or die "Usage: perl $0 dirname\n";
 my ($dir) = @ARGV;
 
 chdir $dir;
@@ -27,8 +26,7 @@ foreach my $key (keys %sets) {
     # 检查Z分量是否存在
     $Z = "${key}Z.SAC";
     if (!-e $Z) {  # 若不存在，则删除该台站的所有数据
-        warn "Vertical component missing!\n";
-        unlink glob "$key?.SAC";
+        warn "$key: Vertical component missing!\n";
         next;
     }
 
@@ -40,8 +38,16 @@ foreach my $key (keys %sets) {
         $E = "${key}1.SAC";
         $N = "${key}2.SAC";
     } else {   # 水平分量缺失
-        warn "Horizontal components missing!\n";
-        unlink glob "$key?.SAC";
+        warn "$key: Horizontal components missing!\n";
+        next;
+    }
+
+    # 检查水平分量是否正交
+    my (undef, $cmpaz_E) = split m/\s+/, `saclst cmpaz f $E`;
+    my (undef, $cmpaz_N) = split m/\s+/, `saclst cmpaz f $N`;
+    my $cmpaz_delta = abs($cmpaz_E - $cmpaz_N);
+    unless ((abs($cmpaz_delta - 90) <= 0.01) or (abs($cmpaz_delta - 270) <= 0.01)) {
+        warn "$key: $E $N are not orthogonal!\n";
         next;
     }
 
@@ -50,27 +56,34 @@ foreach my $key (keys %sets) {
     my (undef, $Zb, $Ze, $Zdelta) = split " ", `saclst b e delta f $Z`;
     my (undef, $Eb, $Ee, $Edelta) = split " ", `saclst b e delta f $E`;
     my (undef, $Nb, $Ne, $Ndelta) = split " ", `saclst b e delta f $N`;
-    if ($Zdelta != $Edelta or $Zdelta != $Ndelta) {
-        die "$key: delta not equal\n"
+    unless ( $Zdelta == $Edelta and $Zdelta == $Ndelta) {
+        warn "$key: delta not equal!\n";
+        next;
     }
 
     # 获取三分量里的最大B和最小E值作为数据窗
     my $begin = max($Zb, $Eb, $Nb) + $Zdelta;
     my $end = min($Ze, $Ee, $Ne) - $Zdelta;
 
-    # 输出文件名为 NET.STA.LOC.[RTZ]
-    my ($net, $sta, $loc, $ch) = split /\./, $key;
-    my $prefix = "${net}_${sta}.";
-    $R = $prefix."r";
-    $T = $prefix."t";
-    $Z0 = $prefix."z";
+    # 如果 LOC 具有区分文件的意义输出文件名为 NET_STA_LOC.[RTZ],否则为 NET_STA.[RTZ]
+    my $i = 12;
+    foreach (keys %sets) {
+        my ($net1, $sta1) = split m/\./;
+        my ($net2, $sta2) = split m/\./, $key;
+        $i = int ($i / 2) if (($net1 eq $net2) and ($sta1 eq $sta2));
+    }
+    my $prefix = substr $key, 0, length($key) - $i;#如果想一律为 NET_STA.[RTZ]，此处$i = 3
+    $prefix =~ s/\./_/g;
+    $R = $prefix.".r";
+    $T = $prefix.".t";
+    $Z0 = $prefix.".z";
 
-    print SAC "cut $begin $end\n";
-    print SAC "r $E $N\n";
-    print SAC "rotate to gcp\n";
-    print SAC "w $R $T\n";
-    print SAC "r $Z\n";
-    print SAC "w $Z0\n";
+    print SAC "cut $begin $end \n";
+    print SAC "r $E $N \n";
+    print SAC "rotate to gcp \n";
+    print SAC "w $R $T \n";
+    print SAC "r $Z \n";
+    print SAC "w $Z0 \n";
 }
 print SAC "q\n";
 close(SAC);

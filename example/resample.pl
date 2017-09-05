@@ -1,11 +1,15 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+require config;
 $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
-@ARGV == 2 or die "Usage: perl $0 dir delta\n";
+@ARGV == 1 or die "Usage: perl $0 dir\n";
 
-my ($dir, $delta) = @ARGV;
+my ($dir) = @ARGV;
+my %pars = read_config($dir);
+my $delta = $pars{'RESAMPLE'};
+
 chdir $dir;
 
 # 重采样
