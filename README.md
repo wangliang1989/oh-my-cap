@@ -2,7 +2,7 @@
 
 CAP 是计算震源机制的一种常用方法，很多地震学同行都需要学习、使用和研究它。我基于 gCAP1.0 建立了 Oh My CAP 这个开源项目，总结整理了在使用 CAP 中的经验，希望能够为大家提供一个学习、探讨 CAP 的平台。
 
-项目主页： [http://wangliang.one/oh-my-cap/]()
+项目主页： [http://oh-my-cap.wangliang.one]()
 
 ## 联系我
 
