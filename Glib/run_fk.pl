@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use FindBin;
+use lib $FindBin::Bin;
 require config;
 
 @ARGV >= 1 or die "Usage: perl $0 configname";

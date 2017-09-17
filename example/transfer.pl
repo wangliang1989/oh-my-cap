@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use FindBin;
+use lib $FindBin::Bin;
 require config;
 $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
