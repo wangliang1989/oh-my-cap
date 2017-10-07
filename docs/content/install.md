@@ -6,40 +6,56 @@ enable_toc = true
 weight = 3
 +++
 
-对于初学者。本安装文档的每一个字都需要阅读！因为版权原因，我无法提供全部安装包，有困难请加群 580712662。
+初学者需要阅读本安装文档的每一个字！
 
-以下安装步骤在 CentOS 上验证通过。在其他 Linux 发行版及 Mac 上安装步骤类似。
-因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以本安装指南不适用于 Windows。
+因为版权原因，我无法在此提供全部安装包，有困难请加群 580712662。
+gCAP 依赖 SAC、GMT、fk 和 pssac，没有这四个，程序用不上来。另外，绝大多数情况，原始地震数据是 seed 格式，所以往往需要 rdseed。
 
-gCAP 依赖 SAC、GMT、fk 和 pssac。
+## 平台问题
+gCAP 可以运行在 GNU/Linux 和 MacOS 上。因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以请勿尝试 Windows！
+98% 的可能性你会在 GNU/Linux 上用 gCAP。GNU/Linux 有众多的桌面发行版，这些桌面发行版主要可以分为两组即以红帽为基础的 REHL 系和以 Debian 为基础的 Debian 系。红帽、CentOS、Fedora 等属于 REHL 系，Debian、Ubuntu、Mint 属于 Debain 系。
+以下安装步骤在 CentOS 和 Mint 上验证通过。在其他 Linux 发行版及 Mac 上安装步骤类似。
+
 
 ## 安装编译工具
 
-### CentOS 用户
+请勿尝试安装 g77！gfortran 已经全面代替 g77 了。
+REHL 系（红帽、CentOS、Fedora 等）用户请参照 CentOS 的安装方式。
+Debain 系（Debian、Ubuntu、Mint 等）用户请参照 Mint 的安装方式。
+
+### CentOS
 
     sudo yum install gcc gcc-c++ gcc-gfortran
     sudo yum install compat-gcc-44 compat-gcc-44-c++ compat-gcc-44-gfortran compat-libf2c-34
     sudo yum install make
 
-其他 Linux 发行版安装方法类似。请勿尝试安装 g77，gfortran 已经全面代替 g77 了。
+### Mint
 
-### MacOS 用户
+    sudo apt-get install gcc gfortran
+
+### MacOS
 
 MacOS 用户推荐使用 [Homebrew](http://brew.sh/index_zh-cn.html) 安装。
 
     brew install gcc make
 
+## rdseed
+
+rdseed 用于转换地震数据，是非常常用的软件。如果你不安装 rdseed，你也可以使用本项目，但无法运行成功本项目提供的例子。安装请参见 [rdseed 的安装](http://seisman.info/install-rdseed.html)。虽然需要申请，IRIS 才提供 rdseed，但是只要提交申请，不经审核，即时提供下载。
+
 ## SAC
 
-Oh My CAP 依赖 SAC **v101.6a**。
+建议使用 SAC 的 **v101.6a** 版。
 
-SAC 是免费而非开源软件。根据授权协议，我不能直接向你提供，你需要自己向 IRIS 申请源码包或者二进制包。申请地址是 <http://ds.iris.edu/ds/nodes/dmc/forms/sac/> 。你要注意，这个审核是人工审核，别和 IRIS 耍花招。
+SAC 是非开源软件，但对学术界用户开放源代码和免费使用。根据授权协议，我不能直接向你提供，你需要自己向 IRIS 证明你的学术身份来申请源码包或者二进制包。申请地址是 <http://ds.iris.edu/ds/nodes/dmc/forms/sac/> 。你要注意，这个审核是人工审核，和前面的 rdseed 可不一样，别和 IRIS 耍花招。
 
 SAC 的安装参考：
 
 - [SAC 在 Linux 上的安装](https://seisman.github.io/SAC_Docs_zh/introduction/linux-install.html)
 
 - [SAC 在 Mac 上的安装](https://seisman.github.io/SAC_Docs_zh/introduction/mac-install.html)
+
+已知在 Ubuntu 上如果用二进制包安装，会导致之后的 fk 等编译失败，故强烈建议用源码编译的方式。
 
 ## GMT
 
