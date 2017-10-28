@@ -24,7 +24,8 @@ foreach my $Zfile (glob "*Z.SAC") {
     my $end = min ($e, ($t0 + 600));
 
     if ($start < $end) {
-        print SAC "cut $start $end\n";
+        #print SAC "cut $start $end\n";
+        print "${net}.${sta}.*.SAC $b -> $start $e -> $end\n";
         print SAC "r ${net}.${sta}.*.SAC\n";
         print SAC "ch t0 $t0\n";
         print SAC "ch kt0 Pnl\n";
