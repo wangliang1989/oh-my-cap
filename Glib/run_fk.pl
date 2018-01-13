@@ -18,18 +18,34 @@ foreach my $fname (@config){
     my $flat = "YES";
     $flat = $pars{"FLAT"} if defined($pars{"FLAT"});
 
-    mkdir $model unless (-d $model);
-    open (OUT, "> $model/$model") or die;
-    print OUT "$pars{'MODEL'}\n";
-    chdir $model or die;
-
     print "NT: $nt\nDT: $dt\n";
     print "MODEL:\n$pars{'MODEL'}\n";
     print "FLAT: $flat\n";
     print "DEPTH:\n@depth\n";
     print "DIST:\n@dist\n";
-    sleep (10);
+    
+    my $err = 0;
+    my @layer = split m/\n/, $pars{'MODEL'};
+    foreach (@layer) {
+        my $layer = trim($_);
+        my ($dep) = split m/\s+/, $layer;
+        foreach (@depth) {
+            if ($_ == $dep) {
+                print "设置错误：震源在 ${_}km 深度的界面上\n";
+                $err++;
+            }
+        }
+     }
+    if ($err > 0) {
+        print "设置有错误，将导致计算错误，OH MY CAP 中止调用 fk\n";
+        next;
+    }
+    sleep (5);
 
+    mkdir $model unless (-d $model);
+    open (OUT, "> $model/$model") or die;
+    print OUT "$pars{'MODEL'}\n";
+    chdir $model or die;
     foreach my $depth (@depth) {
         $depth = "0$depth" if ($depth < 10);
         if ($flat eq "YES") {
