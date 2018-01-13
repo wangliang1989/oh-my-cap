@@ -60,7 +60,6 @@ foreach my $fname (@config){
     foreach my $depth (@depth) {
         my $pid = $pm -> start and next;
 
-        $depth = "0$depth" if ($depth < 10);
         if ($flat eq "YES") {
             # 计算双力偶
             system "fk_parallel.pl -M$model/$depth/f -N$nt/$dt -S2 @dist";
