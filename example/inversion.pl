@@ -16,7 +16,6 @@ foreach my $event (@dir){
     # 获取反演的震源深度
     my @depth = split m/\s+/, $pars{'DEPTH'};
     foreach my $depth (@depth) {
-        $depth = "0$depth" if $depth < 10;
         # deal with -M option
         my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";
         print "cap.pl $cap_args $event\n";

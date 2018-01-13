@@ -47,7 +47,6 @@ foreach my $fname (@config){
     print OUT "$pars{'MODEL'}\n";
     chdir $model or die;
     foreach my $depth (@depth) {
-        $depth = "0$depth" if ($depth < 10);
         if ($flat eq "YES") {
             # 计算双力偶
             system "fk.pl -M$model/$depth/f -N$nt/$dt -S2 @dist";
