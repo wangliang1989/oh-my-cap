@@ -8,6 +8,7 @@ require config;
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;
 
+my $date = `date`;
 foreach my $fname (@config){
     my %pars = read_config($fname);
     my ($model) = split m/\./, $fname;
@@ -65,3 +66,5 @@ foreach my $fname (@config){
 
     chdir ".." or die;
 }
+print "$date";
+system "date";

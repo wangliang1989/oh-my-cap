@@ -9,6 +9,7 @@ require config;
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;
 
+my $date = `date`;
 # 计算当前计算机逻辑核核数
 my ($MAX_PROCESSES) = split m/\n/, `cat /proc/cpuinfo |grep "processor"|wc -l`;
 # 核数较少的个人 PC 只用一半的核
@@ -81,3 +82,6 @@ foreach my $fname (@config){
 
     chdir ".." or die;
 }
+
+print "$date";
+system "date";
