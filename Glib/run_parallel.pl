@@ -1,21 +1,25 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Parallel::ForkManager;
 use FindBin;
 use lib $FindBin::Bin;
+use Sys::Info;
+use Sys::Info::Constants qw( :device_cpu );
+use Parallel::ForkManager;
 require config;
 
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;
 
-my $date = `date`;
-# 计算当前计算机逻辑核核数
-my ($MAX_PROCESSES) = split m/\n/, `cat /proc/cpuinfo |grep "processor"|wc -l`;
-# 核数较少的个人 PC 只用一半的核
-$MAX_PROCESSES = int ($MAX_PROCESSES * 0.5) if ($MAX_PROCESSES <= 4);
-# 保证核数至少为 1
-$MAX_PROCESSES = 1 if ($MAX_PROCESSES < 1);
+# 确定最大线程数
+my %options;
+my $info = Sys::Info->new;
+my $cpu  = $info->device( CPU => %options );
+printf "CPU: %s\n", scalar($cpu->identify)  || 'N/A';
+printf "CPU speed is %s MHz\n", $cpu->speed || 'N/A';
+printf "There are %d CPUs\n"  , $cpu->count || 1;
+printf "CPU load: %s\n"       , $cpu->load  || 0;
+my $MAX_PROCESSES = $cpu->count;
 
 foreach my $fname (@config){
     my %pars = read_config($fname);
@@ -82,6 +86,3 @@ foreach my $fname (@config){
 
     chdir ".." or die;
 }
-
-print "$date";
-system "date";
