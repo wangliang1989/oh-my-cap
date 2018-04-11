@@ -3,8 +3,7 @@ use strict;
 use warnings;
 use FindBin;
 use lib $FindBin::Bin;
-use Sys::Info;
-use Sys::Info::Constants qw( :device_cpu );
+use Sys::CpuAffinity;
 use Parallel::ForkManager;
 require config;
 
@@ -12,14 +11,7 @@ require config;
 my @config = @ARGV;
 
 # 确定最大线程数
-my %options;
-my $info = Sys::Info->new;
-my $cpu  = $info->device( CPU => %options );
-printf "CPU: %s\n", scalar($cpu->identify)  || 'N/A';
-printf "CPU speed is %s MHz\n", $cpu->speed || 'N/A';
-printf "There are %d CPUs\n"  , $cpu->count || 1;
-printf "CPU load: %s\n"       , $cpu->load  || 0;
-my $MAX_PROCESSES = $cpu->count;
+my $MAX_PROCESSES = Sys::CpuAffinity::getNumCpus();
 
 foreach my $fname (@config){
     my %pars = read_config($fname);
