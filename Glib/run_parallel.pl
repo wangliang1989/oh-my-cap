@@ -10,8 +10,15 @@ require config;
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;
 
-# 确定最大线程数
-my $MAX_PROCESSES = Sys::CpuAffinity::getNumCpus();
+# 计算当前计算机逻辑核核数
+my $MAX_PROCESSES;
+my ($system) = split m/\s+/, `uname`;
+if ($system eq 'Darwin') {
+    ($MAX_PROCESSES) = split m/\s+/, `sysctl -n hw.ncpu`;
+}elsif ($system eq 'Linux'){
+    ($MAX_PROCESSES) = split m/\n/, `cat /proc/cpuinfo |grep "processor"|wc -l`;
+}
+print "system: $system\nCPU: $MAX_PROCESSES\n";
 
 foreach my $fname (@config){
     my %pars = read_config($fname);
