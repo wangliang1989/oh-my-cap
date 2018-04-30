@@ -1,3 +1,4 @@
+i_*
 *.o
 src/fk/bessel.f
 src/fk/fk
