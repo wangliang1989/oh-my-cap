@@ -18,10 +18,11 @@ print SAC "wild echo off\n";
 foreach my $Zfile (glob "*Z.SAC") {
     my ($net, $sta) = split m/\./, $Zfile;
     my (undef, $evdp, $gcarc, $b, $e) = split m/\s+/, `saclst evdp gcarc b e f $Zfile`;
-    my @time = split m/\s+/, `taup_time -mod prem -ph P,p,Pn -h $evdp -deg $gcarc --time`;
-    my $t0 = min @time;
-    my $start = max (0, $b, ($t0 - 30));
-    my $end = min ($e, ($t0 + 600));
+    # 已经有很多人报告这个脚本在这里出现非预期的结果，此脚本真的没有问题
+    my @time = split m/\s+/, `taup_time -mod prem -ph P,p,Pn -h $evdp -deg $gcarc --time`;# @time 是 Pnl 波的到时
+    my $t0 = min @time;# $t0 是 Pnl 波第一个波至的到时
+    my $start = max ($b, ($t0 - 30));# cut 数据的开始在第一个波至前 30 秒，如果这个时刻比数据开始时刻早，则用数据本身的开始时刻
+    my $end = min ($e, ($t0 + 600));# cut 数据的结束在第一个波至后 600 秒，如果这个时刻比数据结束时刻晚，则用数据本身的结束时刻
 
     if ($start < $end) {
         print SAC "cut $start $end\n";
@@ -30,7 +31,7 @@ foreach my $Zfile (glob "*Z.SAC") {
         print SAC "ch kt0 Pnl\n";
         print SAC "write over\n";
     } else {
-        unlink glob "${net}.${sta}.*.SAC";
+        unlink glob "${net}.${sta}.*.SAC";# 如果脚本执行了这句话，最大的可能性是 event.info 中所用的时区和 sac 数据不同
     }
 }
 print SAC "q\n";
