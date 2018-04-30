@@ -1,4 +1,0 @@
-User-agent: *
-{{ range $name, $items := .Site.Taxonomies }}
-Disallow: /{{ $name }}/{{ end }}
-Disallow: /404.html

@@ -1,0 +1,47 @@
+site_name: Oh My CAP
+pages:
+    - 引言: index.md
+    - 写给初学者: intro.md
+    - 安装: install.md
+    - 快速开始: quick-start.md
+    - 流程:
+        - 流程介绍: procedures/intro-to-procedures.md
+        - 计算格林函数: procedures/gflib.md
+        - 数据预处理: procedures/preprocess.md
+        - 反演: procedures/inversion.md
+    - 反演参数: parameter.md
+    - 版本发布: changelog.md
+    - 代码差异: code-diffs.md
+theme:
+  name: 'material'
+  favicon: 'img/favicon.ico'
+  logo: 'img/favicon.ico'
+  language: 'zh'
+  palette:
+    primary: 'blue'
+    accent: 'indigo'
+
+markdown_extensions:
+    - admonition
+    - codehilite(guess_lang=false,linenums=false)
+    - toc(permalink=true)
+    - footnotes
+    - meta
+    - def_list
+    - pymdownx.arithmatex
+    - pymdownx.betterem(smart_enable=all)
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.emoji:
+        emoji_generator: !!python/name:pymdownx.emoji.to_png
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - pymdownx.tasklist
+    - pymdownx.tilde
+extra_javascript:
+    - 'js/extra.js'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'

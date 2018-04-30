@@ -1,4 +1,0 @@
-{{ $font := .Get 0 }}
-{{ if (or (or ( (or (or (eq $font "allura") (eq $font "daniel-regular")) (or (eq $font "calligraffiti") (eq $font "dancing-script")) ) ) ( (or (or (eq $font "journal") (eq $font "euphoria-script")) (or (eq $font "kingthings-wrote") (eq $font "note-this")) ) ) ) (or (or (eq $font "vag-handwritten") (eq $font "daniel")) (eq $font "daniel-black") ) ) }}
-<span class="handwriting {{ $font }}">{{ .Inner }}</span>
-{{ end }}

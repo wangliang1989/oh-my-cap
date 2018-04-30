@@ -1,8 +1,0 @@
-{{- if .IsPage -}}
-{
-  "name": "{{ .Title }}",
-  "description": "{{ with .Params.description }}{{ (replaceRE "\n" "$1" (. | plainify)) | htmlEscape }}{{ else }}{{ (replaceRE "\n" "$1" (.Summary | plainify)) | htmlEscape }}{{ end }}",
-  "body": "{{ with .Content }}{{ (replaceRE "\n" "$1" (. | plainify)) | replaceRE "\\\\" "\\\\" | htmlEscape }}{{ end }}",
-  "url": "{{ .URL | absLangURL }}"
-}
-{{- end -}}

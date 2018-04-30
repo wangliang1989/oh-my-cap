@@ -1,5 +1,0 @@
-[
-  {{- $links := apply (where $.Site.Pages "Kind" "page") "partial" "search_item.json" "." -}}
-  {{- $clean := apply $links "chomp" "." -}}
-  {{ delimit $clean "," }}
-]
