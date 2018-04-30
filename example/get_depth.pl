@@ -11,7 +11,7 @@ my @dir = @ARGV;
 foreach my $event (@dir) {
     my %pars = read_config($event);
     chdir "$event" or die "can not open dir $event\n";
-    
+
     unlink "junk.out" if (-e "junk.out");
     my @depth = sort { $a <=> $b } split m/\s+/, $pars{'DEPTH'};
     foreach my $depth (@depth) {
