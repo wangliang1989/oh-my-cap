@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use FindBin;
 use lib $FindBin::Bin;
-use Sys::CpuAffinity;
 use Parallel::ForkManager;
 require config;
 
