@@ -6,7 +6,7 @@ $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
 
-chdir $dir;
+chdir $dir or die "cannot get in $dir";
 
 # 删除之前可能存在的SAC文件和RESP文件
 unlink glob "*.SAC";
