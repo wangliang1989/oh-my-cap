@@ -31,7 +31,9 @@ foreach my $Zfile (glob "*Z.SAC") {
         print SAC "ch kt0 Pnl\n";
         print SAC "write over\n";
     } else {
-        unlink glob "${net}.${sta}.*.SAC";# 如果脚本执行了这句话，最大的可能性是 event.info 中所用的时区和 sac 数据不同
+        # 如果脚本删除了此数据，最大的可能性是 event.info 中所用的时区和 sac 数据中的不同
+        print "Oh My CAP: $0 unlink ${net}.${sta}.*.SAC\n";
+        unlink glob "${net}.${sta}.*.SAC";
     }
 }
 print SAC "q\n";
