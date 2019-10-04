@@ -16,13 +16,7 @@ foreach my $event (@dir){
     # 获取反演的震源深度
     my @depth = split m/\s+/, $pars{'DEPTH'};
     foreach my $depth (@depth) {
-        # deal with -M option
-        my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";
-        print "cap.pl $cap_args $event\n";
-        unlink "$event/$pars{'MODEL'}_${depth}.ps";
+        my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";# deal with -M option
         system "cap.pl $cap_args $event";
-        system "ps2raster -P -Tf $event/$pars{'MODEL'}_${depth}.ps";
-        unlink "$event/$pars{'MODEL'}_${depth}.ps";
-        print "\n";
     }
 }
