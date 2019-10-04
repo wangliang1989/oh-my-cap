@@ -308,7 +308,7 @@ foreach $eve (@event) {
   plot:
   if ( $plot > 0 && ($? >> 8) == 0 ) {
      chdir($eve);
-     &plot($md_dep, $m1, $m2, $amplify, $ncom, $sec_per_inch);
+     plot($md_dep, $m1, $m2, $amplify, $ncom, $sec_per_inch);
      unlink(<${md_dep}_*.?>) unless $keep;
      chdir("../");
   }
