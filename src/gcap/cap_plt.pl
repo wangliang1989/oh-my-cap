@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 use List::Util qw(min max);
-use List::Util qw(min max);
 $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
 sub plot {
