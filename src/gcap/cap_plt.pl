@@ -61,11 +61,11 @@ sub plot {
     gmtcmd ("text -JX5c -R-1/1/-1/1 -F+f10p,1,black+jLB -N -Xa2c -Ya-0.5c","0 0 FM $strike $dip $rake Mw $mag rms $rms1 $rms2 ERR $err_strike $err_dip $err_rake ISO $iso $iso_err CLVD $clvd $clvd_err");
     gmtcmd ("text -JX5c -R-1/1/-1/1 -F+f10p,1,black+jLB -N -Xa2c -Ya-1c","0 0 Variance reduction $variance_reduction");
 
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-1c -F+f15p,0,black -N -Xa3c", "0 0 Pz");
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-1c -F+f15p,0,black -N -Xa7c", "0 0 Pr");
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-1c -F+f15p,0,black -N -Xa11c", "0 0 Sz");
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-1c -F+f15p,0,black -N -Xa15c", "0 0 Sr");
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-1c -F+f15p,0,black -N -Xa19c", "0 0 Sh");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-0.5c -F+f15p,0,black -N -Xa3c", "0 0 Pz");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-0.5c -F+f15p,0,black -N -Xa7c", "0 0 Pr");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-0.5c -F+f15p,0,black -N -Xa11c", "0 0 Sz");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-0.5c -F+f15p,0,black -N -Xa15c", "0 0 Sr");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -D1c/-0.5c -F+f15p,0,black -N -Xa19c", "0 0 Sh");
 
     my ($min, $max) = getminmax($mdl);
 
