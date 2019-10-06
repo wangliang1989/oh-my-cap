@@ -89,7 +89,7 @@ sub plot {
 }
 sub label {
     my ($xy, $fit, $shift) = @_;
-    gmtcmd ("text -JX2c -R-1/1/-1/1 -F+f10p,0,black -D0c/-1c -N $xy", "0 0.3 $shift", "0 -0.3 $fit");
+    gmtcmd ("text -JX2c -R-1/1/-1/1 -F+f10p,0,black -N $xy", "0 0.3 $shift", "0 -0.3 $fit");
 }
 sub fitting {
     my ($phase, $min, $max) = @_;
