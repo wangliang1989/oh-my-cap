@@ -72,7 +72,7 @@ sub plot {
     foreach my $line (@station) {
         #IU_WCI    137.5/-2.45 1 2.29e-04 25  5.00 1 6.50e-04 37  5.00 1 7.40e-05 90  1.60 1 9.85e-05 81  1.60 1 3.75e-04 98  3.80
         my ($sta, $dist) = (split m/\s+/, $line)[0..1];
-        gmtcmd ("text -JX4c -R-1/1/-1/1 -F+f10p,0,black -Y-4c","0 0.2 $sta", "0 -0.2 $dist");
+        gmtcmd ("text -JX4c -R-1/1/-1/1 -F+f10p,0,black -Y-3.5c","0 0.2 $sta", "0 -0.2 $dist");
         fitting("${mdl}_${sta}", $min, $max);
         my ($pz_fit, $pz_shift) = (split m/\s+/, $line)[4..5];
         my ($pr_fit, $pr_shift) = (split m/\s+/, $line)[8..9];
