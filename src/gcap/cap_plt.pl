@@ -120,7 +120,7 @@ sub getminmax {
     return ($min, $max);
 }
 sub pssac {
-    my ($phase, $redfile, $blackfile, $x, , $min, $max) = @_;
+    my ($phase, $redfile, $blackfile, $x, $min, $max) = @_;
     $redfile = "$phase.$redfile";
     $blackfile = "$phase.$blackfile";
     my ($b, $e);
@@ -133,8 +133,8 @@ sub pssac {
     }
     $b = $b - 0.2 * ($e - $b);
     $e = $e + 0.2 * ($e - $b);
-    system "gmt sac -JX4c -R$b/$e/$min/$max -En -T1 -W2p,black $x $blackfile";
-    system "gmt sac -JX4c -R$b/$e/$min/$max -En -T1 -W1p,red $x $redfile";
+    system "gmt sac -JX4c -R0/$e/$min/$max -En -T+t-2 -W2p,black $x $blackfile";
+    system "gmt sac -JX4c -R0/$e/$min/$max -En -T+t-2 -W1p,red $x $redfile";
 }
 sub gmtcmd {
     my @in = @_;
