@@ -316,7 +316,7 @@ int	wrtsac2(const char *, int, const float *x, const float *y);
 SACHEAD	sachdr(float, int, float);
 void	swab4(char *, int);
 void	ResetSacTime(SACHEAD *);
-int	sac_head_inex(const char *name);
+int	sac_head_index(const char *name);
 int	testByte(char *);
 
 /* the following two are in libsac.a */

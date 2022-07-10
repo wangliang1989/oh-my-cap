@@ -16,10 +16,24 @@ Oh My CAP 项目基于 gCAP 建立，提供使用 gCAP 的教程和调用脚本�
 
 如果你发表了正式文章，需要有以下引用
 
->Zhu, L., and D. V. Helmberger, 1996, Advancements in source estimation techniques using broadband regional seismograms. *BSSA*, 86, 1634-1641. (78)
+>Zhu, L, and D. V. Helmberger, 1996, Advancements in source estimation techniques using broadband regional seismograms. *BSSA*, 86, 1634-1641. (78)
 
 >Zhu L, Ben-Zion Y. Parametrization of general seismic potency and moment tensors for source inversion of seismic waveform data[J]. *Geophysical Journal International*, 2013, 194(2): 839-843.
 
-如果你认为我的工作对你有帮助，欢迎引用我的论文：
+## 引引我的论文吧
 
->王亮.裁剪——粘贴波形反演方法及其在地震学中的应用[D]. 桂林: 桂林理工大学, 2017
+如果你认为我的工作对你有帮助，欢迎引用我的论文。以下是我的论文的中英文信息：
+
+>王亮, 薛霆虓, 季海磊. 2016. 集集强余震震源机制解分析[J]. 地球物理学进展. 31(5): 1998-2004
+
+>Wang L, Xue T X, Ji H L. 2016. Focal mechanisms of Taiwan ChiChi earthquake aftershocks[J]. Progress in Geophysics. 31(5): 1998-2004
+
+下载这篇论文，请移步地球物理学进展的官网： http://www.progeophys.cn/CN/10.6038/pg20160515
+
+我的硕士学位论文的下载地址是 https://www.jianguoyun.com/p/DeZplx8Q5s_iCRjo6okE
+
+## 捐助
+
+支付宝账户：wangliang0222@foxmail.com 。
+
+我会尽力解答疑问，但无能力解决使用 CAP 遇到的所有问题。

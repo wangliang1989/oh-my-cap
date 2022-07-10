@@ -104,5 +104,6 @@ float	*trap(float, float, float, int *);
 float	*cutTrace(float *, int, int, int);
 int	discard_bad_data(int,DATA *,SOLN,float,float *);
 int	check_first_motion(float mt[3][3], FM *fm, int n, float fm_thr);
+void fttq_();
 
 #endif
