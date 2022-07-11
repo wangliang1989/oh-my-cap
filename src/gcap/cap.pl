@@ -3,7 +3,7 @@
 # A user-friendly PERL interface to the CAP source inversion code cap
 #
 # written by Lupei Zhu, 3/6/1998, Caltech
-# 
+#
 # revision history
 #	6/18/2001	add usage and documentation.
 #	11/05/2012	add isotropic and CLVD search (-J).
@@ -66,7 +66,7 @@ $dt = 0.1;
 @thrshd = (10., 10., 10., 10., 10.);
 
 # command line input, [] means optional, see () for default value
-$usage = 
+$usage =
 " ===== CAP seismic source tensor inversion using seismic waveforms ====
 	Ref: Zhu and Helmberger, 1996, BSSA 86, 1645-1641.
 	     Zhu and Ben-Zion, 2013, GJI, submitted.
@@ -257,7 +257,7 @@ unless ($dura) {
   $dura = 9 if $dura > 9;
 }
 
-if ( -r $dura ) {	# use a sac file for source time function   
+if ( -r $dura ) {	# use a sac file for source time function
   $dt = 0;
   $riseTime = 1;
 } else {
