@@ -11,12 +11,11 @@ my @dir = @ARGV;
 foreach my $event (@dir){
     my %pars = read_config($event);
     my $weight = $pars{'-Z'};
-    die "no weight file\n" if !-e "$event/$weight";
+    die "no weight file\n" unless -e "$event/$weight";
 
     # 获取反演的震源深度
     my @depth = split m/\s+/, $pars{'DEPTH'};
-    foreach my $depth (@depth) {
-        my $cap_args = "$pars{'cap_args'} -M$pars{'MODEL'}_${depth}/$pars{'MAG'}";# deal with -M option
-        system "cap.pl $cap_args $event";
+    foreach (@depth) {
+        system "cap.pl $pars{'cap_args'} -M$pars{'MODEL'}_$_/$pars{'MAG'} $event";
     }
 }
