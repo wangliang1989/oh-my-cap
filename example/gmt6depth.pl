@@ -37,15 +37,8 @@ foreach my $event (@dir) {
         my @info = split m/\s+/;
         (undef, $dep[$i]) = split m/_/, $info[3];
         ($strike[$i], $dip[$i], $rake[$i], $mag[$i], $rms[$i], $dof, $iso[$i], $clvd[$i]) = @info[5, 6, 7, 9, 11, 12, 18, 21];
-        if (defined($min)) {
-            if ($min > $rms[$i]) {
-                $min = $rms[$i];
-                $best = $i;
-            }
-        }else{
-            $min = $rms[$i];
-            $best = $i;
-        }
+        ($min, $best) = ($rms[$i], $i) unless defined($min);
+        ($min, $best) = ($rms[$i], $i) if $min > $rms[$i];
         $i++;
     }
     if ($i == 2) {
