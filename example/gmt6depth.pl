@@ -6,9 +6,8 @@ use lib $FindBin::Bin;
 require config;
 
 @ARGV >= 1 or die "Usage: perl $0 dir\n";
-my @dir = @ARGV;
 
-foreach my $event (@dir) {
+foreach my $event (@ARGV) {
     my %pars = read_config($event);
     chdir "$event" or die "cannot open dir $event\n";
 
