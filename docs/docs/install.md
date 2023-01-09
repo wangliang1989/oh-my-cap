@@ -101,16 +101,8 @@ SAC 的安装参考：
 
 ## GMT
 
-gCAP 依赖 GMT4。
-
-Linux 用户：
-
-- [GMT 4 在 Linux 上的安装](http://blog.seisman.info/install-gmt4-under-linux/)
-- [GMT4 与 GMT5 双版本共存](http://blog.seisman.info/multiple-versions-of-gmt/)
-
-Mac 用户：
-
-- [macOS 下安装 GMT](http://docs.gmt-china.org/install/macOS/)
+目前，本项目只需要安装 gmt6，请在 [gmt 中文社区](https://docs.gmt-china.org/latest/install/)
+的文档中查找适合你的操作系统的安装方案：
 
 ## TauP
 
@@ -135,11 +127,7 @@ $ make
 
 在成功执行完以上步骤后，才可以着手编译 gCAP。
 
-gCAP 使用了商业软件 Numerical Recipes（简称 NR）中的一些子函数，
-包括 `matrix` 、 `free_matrix` 、 `free_convert_matrix` 、 `jacobi` 和 `eigsrt` 。
-由于版权原因，我不能把这几个子函数的源码直接放到这里。
-用户应自行购买缺失的源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
-再在该目录下进行编译:
+在 `/path/to/oh-my-cap/src/gcap` 目录下进行编译:
 
 ````
 $ make
@@ -147,14 +135,13 @@ $ make
 
 ## 添加环境变量
 
-需要为 fk、pssac 和 gcap 添加环境变量。将以下内容加入配置文件 `~/.bashrc` 中:
+需要为 fk 和 gcap 添加环境变量。将以下内容加入配置文件 `~/.bashrc` 中:
 
 ````
 # 注意将 /path/to/oh-my-cap 修改为 oh-my-cap 实际的绝对路径!
-# 若自行安装了 fk 或 pssac，请注释掉相关环境变量配置行
+# 若自行安装了 fk，请注释掉相关环境变量配置行
 export OH_MY_CAP=/path/to/oh-my-cap
 export PATH=$OH_MY_CAP/src/fk:${PATH}
-export PATH=$OH_MY_CAP/src/pssac:${PATH}
 export PATH=$OH_MY_CAP/src/gcap:${PATH}
 ````
 
