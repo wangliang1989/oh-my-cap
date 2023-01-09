@@ -1,24 +1,35 @@
 # 安装
 
-初学者需要阅读本安装文档的每一个字！
+初学者需要阅读本安装文档的每一个字才可能顺利完成安装！
+虽然只有一个页面，但是初学者可能需要一个月才能顺利完成，所以请勿心急。
 
-因为版权原因，我无法在此提供 SAC 和 NR，SAC 需要向 IRIS 申请，而 NR 需要购买。
-gCAP 依赖 SAC、GMT、fk 和 pssac，本项目还要求安装 Taup。另外，绝大多数情况，原始地震数据是 seed 格式，所以往往需要 rdseed。
+## 确定自己的操作系统
 
-## 平台问题
-gCAP 可以运行在 GNU/Linux 和 MacOS 上。因为 gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，所以请勿尝试 Windows！
-98% 的可能性你会在 GNU/Linux 上用 gCAP。
-GNU/Linux 有众多的桌面发行版，这些桌面发行版主要可以分为两组，即以红帽为基础的 REHL 系和以 Debian 为基础的 Debian 系。
-红帽、CentOS、Fedora 等属于 REHL 系，Debian、Ubuntu、Mint 属于 Debain 系。
-如果你是第一次听说 Linux 这些东西，还没装系统，请选择 CentOS。
-以下安装步骤在 CentOS 、Mint 和 Mac 上验证通过。在其他 Linux 发行版骤类似。
+在不同的操作系统上安装Oh My CAP的细节是不同的，所以你需要确定自己使用的是什么操作系统。
+即准确回答问题：自己使用的是什么操作系统？
+如果是 GNU/Linux 系统，是 REHL 系还是 Debian 系？
 
+gCAP 依赖的 SAC 几乎不可能在 Windows 上安装，
+所以本软件包只能在 GNU/Linux 或 MacOS 系统上正常运行，
+而不能运行在 Windows 上。
+
+GNU/Linux 是指以 Linux 为内核，配备一系列 GNU 应用软件的操作系统。
+GNU/Linux 有众多的桌面发行版。
+这些桌面发行版主要可以分为两组，即以红帽为基础的 REHL 系和以 Debian 为基础的 Debian 系。
+红帽、CentOS、Fedora 等属于 REHL 系，Debian、Ubuntu、Mint 等属于 Debain 系。
+
+MacOS 是苹果公司为其电脑预装的操作系统。
+如果你使用的是苹果电脑，你应该就是使用的这款操作系统。
+
+## 命令行和环境变量
+
+当你打开命令行界面后
 ## 安装编译工具
 
 **请勿尝试安装 g77！**
 gfortran 已经全面代替 g77 了。
-REHL 系（红帽、CentOS、Fedora 等）用户请参照 CentOS 的安装方式。
-Debain 系（Debian、Ubuntu、Mint 等）用户请参照 Mint 的安装方式。
+REHL 系（红帽、CentOS、Fedora 等）用户请参照下面的 CentOS 的安装方式。
+Debain 系（Debian、Ubuntu、Mint 等）用户请参照下面的 Mint 的安装方式。
 
 ### CentOS
 
@@ -36,15 +47,40 @@ $ sudo apt-get install gcc gfortran
 
 ### MacOS
 
-MacOS 用户推荐使用 [Homebrew](http://brew.sh/index_zh-cn.html) 安装。
+MacOS 需要使用 Homebrew 安装依赖。
 
+如果你可以在命令行中访问海外网站，请直接使用官方的安装命令：
 ````
-$ brew install gcc make
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+````
+或者前往 Homebrew 的官网 查看安装方法：https://brew.sh/index_zh-cn.html
+
+如果你不能在命令行中访问海外网站，请使用中科大的镜像。
+在中科大的镜像使用文档中有全面的安装说明：
+https://mirrors.ustc.edu.cn/help/brew.git.html
+。
+为了让读者直接抓住终点，我把使用中科大的镜像安装Homebrew的方法提炼如下：
+首先将以下内容加入环境变量：
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+执行命令：
+/bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
+
+安装 gcc、gfortran 和 make：
+````
+$ brew install gcc gfortran make
 ````
 
 ## rdseed
 
-rdseed 用于转换地震数据，是非常常用的软件。如果你不安装 rdseed，你也可以使用本项目，但无法运行成功本项目提供的例子。
+rdseed 用于将 seed 格式的数据转化为 sac 格式。
+seed 是一种数据压缩格式。
+seed 数据格式目前已经逐渐被 miniseed 格式代替了。
+但是 seed 格式在国内依然非常流行。
+Oh My CAP 继续使用 seed 格式的数据作为例子。
+如果不安装 rdseed，读者也可以使用本项目，但无法运行成功本项目提供的例子。
+
 安装请参见 [rdseed 的安装](http://blog.seisman.info/rdseed-install/)。
 具体的安装方法虽然是在 seisman 的博客上，但我都有参与修订，所以是适合你的，下同。
 
@@ -65,16 +101,8 @@ SAC 的安装参考：
 
 ## GMT
 
-gCAP 依赖 GMT4。
-
-Linux 用户：
-
-- [GMT 4 在 Linux 上的安装](http://blog.seisman.info/install-gmt4-under-linux/)
-- [GMT4 与 GMT5 双版本共存](http://blog.seisman.info/multiple-versions-of-gmt/)
-
-Mac 用户：
-
-- [macOS 下安装 GMT](http://docs.gmt-china.org/install/macOS/)
+目前，本项目只需要安装 gmt6，请在 [gmt 中文社区](https://docs.gmt-china.org/latest/install/)
+的文档中查找适合你的操作系统的安装方案：
 
 ## TauP
 
@@ -95,25 +123,11 @@ gcap 使用 fk 计算格林函数。
 $ make
 ````
 
-## pssac
-
-gcap 需要使用 pssac 绘制地震波形。
-
-本项目中包含了 pssac 源码，进入 `/path/to/oh-my-cap/src/pssac` 目录，输入命令进行编译:
-
-````
-$ make
-````
-
 ## gCAP
 
 在成功执行完以上步骤后，才可以着手编译 gCAP。
 
-gCAP 使用了商业软件 Numerical Recipes（简称 NR）中的一些子函数，
-包括 `matrix` 、 `free_matrix` 、 `free_convert_matrix` 、 `jacobi` 和 `eigsrt` 。
-由于版权原因，我不能把这几个子函数的源码直接放到这里。
-用户应自行购买缺失的源码，并将其放到 `/path/to/oh-my-cap/src/gcap` 下，
-再在该目录下进行编译:
+在 `/path/to/oh-my-cap/src/gcap` 目录下进行编译:
 
 ````
 $ make
@@ -121,14 +135,13 @@ $ make
 
 ## 添加环境变量
 
-需要为 fk、pssac 和 gcap 添加环境变量。将以下内容加入配置文件 `~/.bashrc` 中:
+需要为 fk 和 gcap 添加环境变量。将以下内容加入配置文件 `~/.bashrc` 中:
 
 ````
 # 注意将 /path/to/oh-my-cap 修改为 oh-my-cap 实际的绝对路径!
-# 若自行安装了 fk 或 pssac，请注释掉相关环境变量配置行
+# 若自行安装了 fk，请注释掉相关环境变量配置行
 export OH_MY_CAP=/path/to/oh-my-cap
 export PATH=$OH_MY_CAP/src/fk:${PATH}
-export PATH=$OH_MY_CAP/src/pssac:${PATH}
 export PATH=$OH_MY_CAP/src/gcap:${PATH}
 ````
 
