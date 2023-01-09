@@ -32,9 +32,11 @@ foreach my $event (@ARGV) {
             #Event 20080418093658 Model model_05 FM 293 78 -15 Mw 5.08 rms 3.233e-02   121 ERR   2   4   5 ISO 0.00 0.00 CLVD 0.00 0.00
             my @info = split m/\s+/;
             ($dep[$i]) = (split m/_/, $info[3])[1];
+
             ($strike[$i], $dip[$i], $rake[$i], $mag[$i], $rms[$i], $dof, $iso[$i], $clvd[$i]) = @info[5, 6, 7, 9, 11, 12, 18, 21];
             ($min, $best) = ($rms[$i], $i) unless defined($min);
             ($min, $best) = ($rms[$i], $i) if $min > $rms[$i];
+            print "BBBB $rms[$i]\n";
             $i++;
         }
         close(IN);
@@ -59,14 +61,15 @@ foreach my $event (@ARGV) {
     system "gmt begin $pars{'MODEL'}_depth pdf A1c";
     my $depth_title = sprintf("%4.1f", $depth);
     my $sigma_title = sprintf("%4.1f", $sigma);
-    open(GMT, "| gmt plot -JX10c -R$dep[0]/$dep[$i]/-10/100 -Baf -BWSen+t'$event h=$depth_title $sigma_title'") or die;
+    system "gmt basemap -JX10c -R$dep[0]/$dep[$i]/-10/100 -BWSen+t'$event h=$depth_title $sigma_title'";
+    open(GMT, "| gmt plot -Bxaf+l'Depth (km)' -Byaf+l'Root mean square'") or die;
     for (my $x = $dep[0]; $x < $dep[$i]; $x = $x + 0.2) {
         my $y = (($x - $depth) / $sigma) ** 2;
         print GMT "$x $y\n";
     }
     close(GMT);
 
-    open(GMT, "| gmt meca -Sm3c") or die;
+    open(GMT, "| gmt meca -Sm5c") or die;
     for(my $j = 1; $j <= $i - 1; $j++) {
         my ($mecas) = split m/\n/, `radpttn 1 $strike[$j] $dip[$j] $rake[$j] $iso[$j] $clvd[$j]`;
         my @meca = split m/\s+/, $mecas;
