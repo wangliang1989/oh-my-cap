@@ -1,7 +1,6 @@
 site_name: Oh My CAP
-pages:
+nav:
     - 引言: index.md
-    - 写给初学者: intro.md
     - 安装: install.md
     - 快速开始: quick-start.md
     - 流程:
@@ -13,7 +12,7 @@ pages:
     - 版本发布: changelog.md
     - 代码差异: code-diffs.md
 theme:
-  name: 'material'
+  name: 'readthedocs'
   favicon: 'img/favicon.ico'
   logo: 'img/favicon.ico'
   language: 'zh'
