@@ -36,7 +36,6 @@ foreach my $event (@ARGV) {
             ($strike[$i], $dip[$i], $rake[$i], $mag[$i], $rms[$i], $dof, $iso[$i], $clvd[$i]) = @info[5, 6, 7, 9, 11, 12, 18, 21];
             ($min, $best) = ($rms[$i], $i) unless defined($min);
             ($min, $best) = ($rms[$i], $i) if $min > $rms[$i];
-            print "BBBB $rms[$i]\n";
             $i++;
         }
         close(IN);
