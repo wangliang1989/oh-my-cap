@@ -27,5 +27,6 @@ Prof. Zhu 的官方版本： [gcap1.0.tar](http://www.eas.slu.edu/People/LZhu/do
 - 修改 `cap_plt.pl` 和 `depth.pl` 使得其不依赖于 GMT 的系统设置
 - 修改 `cap.pl` 使得用户不必再自行修改该文件
 - 修改 Makefile 使得其更通用
+- 改用 GMT6 绘图
 
 详细修改历史见： <https://github.com/wangliang1989/oh-my-cap/commits/master/src/gcap>
