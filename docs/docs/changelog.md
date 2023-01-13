@@ -11,19 +11,19 @@
 这一次更新间隔了近五年，修改较多。
 这次更新通过如下 PR 合并到 master 分支：
 
-- [更新到 2.0.0](https://github.com/wangliang1989/oh-my-cap/pull/59/files)
+- [更新到 2.0.0](https://github.com/wangliang1989/oh-my-cap/pull/60/files)
 
 其中主要的更新有：
 
-- [波形拟合图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/f316e6ed8d668d94d1e9dfc2f5ce090f51689572)
+- [波形拟合图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/60/commits/dbf6a477ef3e6ef192337d9d426acd545661bab6)
 
-- [深度反演图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/db70edf01292ede7d20a0fac33de48288ae7595f)
+- [深度反演图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/60/commits/b0a9443fef762618b0fa8feafff72a4a3801d7e9)
 
-- [绘制RMS随深度变化图](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/303a7eedd8f2ff8cae148a9a6d2dfe88e1760624)
+- [绘制RMS随深度变化图](https://github.com/wangliang1989/oh-my-cap/pull/60/commits/d850d8a86af3129e53ae7cb809d573b0661c259c)
 
-- [添加外部子函数](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/48a3a44a7b0207fb4c884b4ff494da77efe64da5)
+- [添加外部子函数](https://github.com/wangliang1989/oh-my-cap/pull/60/commits/523d4cd6b9bf36ec9ba57cc600bc3659c41acd95)
 
-- [全面更新文档]()
+- [全面更新文档](https://github.com/wangliang1989/oh-my-cap/pull/60/commits/c5c260033a3dffae0d93391069e56154801f9a82)
 
 ## 1.2
 
