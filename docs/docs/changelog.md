@@ -1,10 +1,29 @@
 # 版本发布
 
-现在，Oh My CAP 采用语意话版本的版本号规则代替之前的 bug 列表来说明版本问题：
+现在，Oh My CAP 在以前的语意话版本的版本号规则的基础上，改为如下原则：
 
 - 主版本号：不兼容的 API 修改，
-- 次版本号：功能性新增，
-- 修订号：问题修正。
+- 次版本号：软件更新，
+- 修订号：文档更新。
+
+## 2.0.0
+
+这一次更新间隔了近五年，修改较多。
+这次更新通过如下 PR 合并到 master 分支：
+
+- [更新到 2.0.0](https://github.com/wangliang1989/oh-my-cap/pull/59/files)
+
+其中主要的更新有：
+
+- [波形拟合图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/f316e6ed8d668d94d1e9dfc2f5ce090f51689572)
+
+- [深度反演图改为 gmt6](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/db70edf01292ede7d20a0fac33de48288ae7595f)
+
+- [绘制RMS随深度变化图](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/303a7eedd8f2ff8cae148a9a6d2dfe88e1760624)
+
+- [添加外部子函数](https://github.com/wangliang1989/oh-my-cap/pull/59/commits/48a3a44a7b0207fb4c884b4ff494da77efe64da5)
+
+- [全面更新文档]()
 
 ## 1.2
 

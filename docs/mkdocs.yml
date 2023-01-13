@@ -1,11 +1,12 @@
 site_name: Oh My CAP
 nav:
     - 引言: index.md
+    - 文献介绍: cite.md
     - 安装: install.md
     - 快速开始: quick-start.md
     - 流程:
         - 流程介绍: procedures/intro-to-procedures.md
-        - 计算格林函数: procedures/gflib.md
+        - 计算格林函数: procedures/glib.md
         - 数据预处理: procedures/preprocess.md
         - 反演: procedures/inversion.md
     - 反演参数: parameter.md
@@ -19,3 +20,9 @@ theme:
   palette:
     primary: 'blue'
     accent: 'indigo'
+plugins:
+  - search
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+markdown_extensions:
+  - mdx_math
