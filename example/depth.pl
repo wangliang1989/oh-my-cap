@@ -16,7 +16,7 @@ foreach my $event (@dir){
     my @info = getinfo($pars{'MODEL'}, @depths);
     my ($R) = getrange(@info);
     system "gmt begin depth_$pars{'MODEL'} pdf A1c";
-    system "gmt basemap -JX10c -R$R -BWSrt -Bxaf+l'Depth' -Byaf+l'RMS'";
+    system "gmt", "basemap", "-JX10c", "-R$R", "-BWSrt", "-Bxaf+lDepth", "-Byaf+lRMS";
     foreach (@info) {
         my ($depth, $variance_reduction, $mrr, $mtt, $mff, $mrt, $mrf, $mtf) = split m/\s+/;
         gmtcmd ("meca -Sm1c", "$depth $variance_reduction 0 $mrr $mtt $mff $mrt $mrf $mtf 23 0 0");
