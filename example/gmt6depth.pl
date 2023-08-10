@@ -60,8 +60,9 @@ foreach my $event (@ARGV) {
     system "gmt begin $pars{'MODEL'}_depth pdf A1c";
     my $depth_title = sprintf("%4.1f", $depth);
     my $sigma_title = sprintf("%4.1f", $sigma);
-    system "gmt basemap -JX10c -R$dep[0]/$dep[$i]/-10/100 -BWSen+t'$event h=$depth_title $sigma_title'";
-    open(GMT, "| gmt plot -Bxaf+l'Depth (km)' -Byaf+l'Root mean square'") or die;
+    system "gmt", "basemap", "-JX10c", "-R$dep[0]/$dep[$i]/-10/100", "-BWSen+t$event h=$depth_title $sigma_title";
+    system "gmt", "basemap", "-Bxaf+lDepth (km)", "-Byaf+lRoot mean square";
+    open(GMT, "| gmt plot") or die;
     for (my $x = $dep[0]; $x < $dep[$i]; $x = $x + 0.2) {
         my $y = (($x - $depth) / $sigma) ** 2;
         print GMT "$x $y\n";
