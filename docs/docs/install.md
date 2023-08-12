@@ -181,9 +181,8 @@ MacOS 的默认 shell 是 zsh，需要将以下内容加入配置文件 `~/.zshr
 ```bash
 # 注意将 /path/to/oh-my-cap 修改为 oh-my-cap 实际的绝对路径!
 # 若自行安装了 fk，请注释掉相关环境变量配置行
-export OH_MY_CAP=/path/to/oh-my-cap
-export PATH=$OH_MY_CAP/src/fk:${PATH}
-export PATH=$OH_MY_CAP/src/gcap:${PATH}
+export OH_MY_CAP=/path/to/oh-my-cap #这一行需要自行修改
+export PATH=$OH_MY_CAP/src/fk:$OH_MY_CAP/src/gcap:${PATH} # 这一行不要修改
 ```
 
 ## 安装 Perl 的并行模块
