@@ -186,9 +186,9 @@ export PATH=$OH_MY_CAP/src/fk:${PATH}
 export PATH=$OH_MY_CAP/src/gcap:${PATH}
 ```
 
-## 安装 Perl 模块
+## 安装 Perl 的并行模块
 
-这一步不是必须的。
+自 v2.1.0 以后，Oh My CAP 要求并行模块。
 
 安装 Perl 模块 Parallel::ForkManager 可以并行计算格林函数。
 Linux 和 Mac 均用 cpan 安装，Centos 7 可能没有默认安装 cpan，推荐直接用 yum 来安装：
