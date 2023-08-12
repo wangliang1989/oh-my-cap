@@ -1,10 +1,8 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use FindBin;
 use List::Util qw(min max);
-use lib $FindBin::Bin;
-require config;
+require "$ENV{'PWD'}/config.pm";
 
 @ARGV >= 1 or die "Usage: perl $0 dirname";
 my @dir = @ARGV;

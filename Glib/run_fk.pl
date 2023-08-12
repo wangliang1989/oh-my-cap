@@ -1,9 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use FindBin;
-use lib $FindBin::Bin;
-require config;
+require "$ENV{'PWD'}/config.pm";
 
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;
