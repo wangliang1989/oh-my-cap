@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-require "$ENV{'PWD'}/config.pm";
+require "$ENV{'OH_MY_CAP'}/oh-my-cap.pm";
 
 @ARGV >= 1 or die "Usage: perl $0 configname";
 my @config = @ARGV;

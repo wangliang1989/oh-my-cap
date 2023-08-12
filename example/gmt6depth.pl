@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-require "$ENV{'PWD'}/config.pm";
+require "$ENV{'OH_MY_CAP'}/oh-my-cap.pm";
 
 @ARGV >= 1 or die "Usage: perl $0 dir\n";
 
 foreach my $event (@ARGV) {
-    my %pars = read_config($event);
+    my %pars = choose_config($event);
     chdir "$event" or die "cannot open dir $event\n";
 
     my $i = 1;

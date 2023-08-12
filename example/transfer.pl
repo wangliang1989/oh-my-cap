@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-require "$ENV{'PWD'}/config.pm";
+require "$ENV{'OH_MY_CAP'}/oh-my-cap.pm";
 $ENV{SAC_DISPLAY_COPYRIGHT} = 0;
 
 @ARGV == 1 or die "Usage: perl $0 dir\n";
 my ($dir) = @ARGV;
-my %pars = read_config($dir);
+my %pars = choose_config($dir);
 my ($f1, $f2, $f3, $f4) = split /\s+/, $pars{'FREQ'};
 
 chdir $dir;

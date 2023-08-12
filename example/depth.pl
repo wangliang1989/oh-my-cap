@@ -2,13 +2,13 @@
 use strict;
 use warnings;
 use List::Util qw(min max);
-require "$ENV{'PWD'}/config.pm";
+require "$ENV{'OH_MY_CAP'}/oh-my-cap.pm";
 
 @ARGV >= 1 or die "Usage: perl $0 dirname";
 my @dir = @ARGV;
 
 foreach my $event (@dir){
-    my %pars = read_config($event);
+    my %pars = choose_config($event);
     chdir $event or die;
     my @depths = split m/\s+/, $pars{'DEPTH'};
     my @info = getinfo($pars{'MODEL'}, @depths);
