@@ -43,4 +43,4 @@ http://www.progeophys.cn/CN/10.6038/pg20160515
 另外，我也提供我的所有第一作者论文和学位论文。
 在我的
 [坚果云网盘](https://www.jianguoyun.com/p/DSgkfDkQ5s_iCRjznPMEIAA)
-中可以找到这篇论文，也可以找到我的以 CAP 为主题的硕士论文：
+中可以找到这篇论文，也可以找到我的以 CAP 为主题的硕士论文。
