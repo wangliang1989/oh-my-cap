@@ -11,6 +11,14 @@ my ($f1, $f2, $f3, $f4) = split /\s+/, $pars{'FREQ'};
 
 chdir $dir;
 
+# 删除没有仪器响应的数据
+foreach my $sac (glob "*.SAC") {
+    my $resp = substr $sac, 0, -4;
+    next unless -e "RESP.$resp";
+    print "Oh My CAP: cannot find RESP.$resp\n";
+    unlink $sac;
+}
+
 # 去仪器响应
 open(SAC, "| sac") or die "Error in opening sac\n";
 print SAC "wild echo off\n";
