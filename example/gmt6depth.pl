@@ -71,7 +71,7 @@ foreach my $event (@ARGV) {
     for(my $j = 1; $j <= $i - 1; $j++) {
         my ($mecas) = split m/\n/, `radpttn 1 $strike[$j] $dip[$j] $rake[$j] $iso[$j] $clvd[$j]`;
         my @meca = split m/\s+/, $mecas;
-        printf GMT "%6.1f %6.1f 0 %s %s %s %s %s %f 17 0 0 %s\n", $dep[$j], ($rms[$j] - $min) / ($min / $dof), @meca[6, 1, 4, 3], $meca[5], $meca[2], $mag[$j];
+        printf GMT "%6.1f %6.1f 0 %s %s %s %s %s %f 17 0 0 %s\n", $dep[$j], ($rms[$j] - $min) / ($min / $dof), @meca[6, 1, 4, 3], -$meca[5], -$meca[2], $mag[$j];
     }
     close(GMT);
     system "gmt end";
