@@ -23,7 +23,7 @@ foreach my $fname (@config) {
             refresh_sac_headers($dist);
             system "gmt begin $dist pdf A1c";
             my $tilte = "Depth: $dep, Epicenter: $dist";
-            system "gmt subplot begin 3x4 -Fs8c/4c -M0.5c/1c -T'$tilte'";
+            system "gmt", "subplot", "begin", "3x4", "-Fs8c/4c", "-M0.5c/1c", "-T$tilte";
             foreach my $q (0, 1, 2, 3, 4, 5, 6, 7, 8, 'a', 'b', 'c') {
                 my $num = $q;
                 $num = 9 if $q eq 'a';
@@ -31,7 +31,7 @@ foreach my $fname (@config) {
                 $num = 11 if $q eq 'c';
                 gmt_draw($dist, $q, $num);
             }
-            system "gmt subplot end";
+            system "gmt", "subplot", "end";
             system "gmt end";
             push @pdf, "${model}_${dep}/${dist}.pdf";
         }
@@ -54,9 +54,9 @@ sub refresh_sac_headers {
 sub gmt_draw {
     my ($dist, $q, $num) = @_;
     my ($b, $e, $min, $max, $t1, $t2) = &getrange($dist, $q);
-    system "gmt subplot set $num";
-    system "gmt basemap -R$b/$e/$min/$max -Baf -BWSen+t'${dist}.grn.${q}'";
-    system "gmt sac -W1p,black ${dist}.grn.${q}";
+    system "gmt", "subplot", "set", "$num";
+    system "gmt", "basemap", "-R$b/$e/$min/$max", "-Baf", "-BWSen+t${dist}.grn.${q}";
+    system "gmt", "sac", "-W1p,black", "${dist}.grn.${q}";
     gmtline ($t1, "1p,blue", $min, $max);
     gmtline ($t2, "1p,red", $min, $max);
 }
