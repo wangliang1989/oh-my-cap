@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-require "$ENV{'PWD'}/config.pm";
+require "$ENV{'OH_MY_CAP'}/oh-my-cap.pm";
 $ENV{SAC_DISPLAY_COPYRIGHT}=0;
 
 my @config = @ARGV;
